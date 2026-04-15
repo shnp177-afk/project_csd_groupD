@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #4b79a1, #283e51);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+/* FILTERS */
+.filters {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background: #283e51;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.filter-btn:hover {
+    background: #4b79a1;
+}
+
+/* COURSES */
+.courses {
+    padding: 20px;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.course-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.course-card .tag {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.beginner { background: #d4edda; color: #155724; }
+.intermediate { background: #fff3cd; color: #856404; }
+.advanced { background: #f8d7da; color: #721c24; }
+
+.course-card button {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    background: #283e51;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* BOOTCAMPS */
+.bootcamps {
+    padding: 20px;
+}
+
+.bootcamp-card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.bootcamp-card ul {
+    padding-left: 20px;
+}
+
+.bootcamp-card button {
+    margin-top: 10px;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    background: #4b79a1;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
