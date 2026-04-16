@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="faviconio-logo/logo.png" type="image/png">
+    <title>Codify - Learn Programming Like Never Before</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/mainstyle.css">
+</head>
+<body>
+    <!-- Cookie Consent Popup -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <h5 class="cookie-title">
+                <i class="fas fa-cookie-bite"></i> Cookie Policy
+            </h5>
+            <p class="cookie-text">We use cookies to enhance your browsing experience and analyze site traffic. By clicking "Accept", you consent to the use of cookies.</p>
+            <div class="cookie-buttons">
+                <button id="acceptCookies" class="btn btn-primary btn-sm">Accept</button>
+                <button id="rejectCookies" class="btn btn-outline-secondary btn-sm">Reject</button>
+                <a href="#" class="btn btn-link btn-sm">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html" id="navbarBrand">
+                <img src="faviconio-logo/logo.png" alt="Codify Logo" class="navbar-logo">
+                <strong>Codify</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="navbarToggle">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" id="navbarMenu">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bootcamps.html">Bootcamps</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tutors.html">Tutors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="quiz.html">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="membership.html" id="membershipLink">Membership</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="heroSection" class="hero-section">
+        <div class="container-fluid hero-container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6 hero-content" id="heroContent">
+                    <h1 class="hero-title" id="heroTitle">
+                        Learn Programming <span class="text-primary">Like Never Before</span>
+                    </h1>
+                    <p class="hero-subtitle" id="heroSubtitle">
+                        Master coding skills with interactive courses, bootcamps, and expert tutors. Start your journey today!
+                    </p>
+                    <div class="hero-buttons" id="heroButtons">
+                        <a href="membership.html" class="btn btn-primary btn-lg me-3" id="ctaButton">
+                            <i class="fas fa-rocket"></i> Get Started
+                        </a>
+                        <a href="#courses" class="btn btn-outline-light btn-lg" id="exploreButton">
+                            <i class="fas fa-binoculars"></i> Explore Courses
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 hero-image" id="heroImage">
+                    <div class="floating-card" id="floatingCard">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses-section py-5">
+        <div class="container">
+            <h2 class="section-title" id="coursesTitle">Our Popular Courses</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+                        <strong>🎓 Master In-Demand Programming Skills</strong><br>
+                        Codify's extensive course collection is meticulously designed for everyone—from absolute beginners taking their first steps in programming to experienced developers looking to expand their expertise. Our curriculum covers the full spectrum of modern web and software development, including:
+                    </p>
+                    <ul style="font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem; margin-left: 2rem;">
+                        <li><strong>Web Development:</strong> HTML5, CSS3, JavaScript, React.js, Vue.js, Angular, Node.js</li>
+                        <li><strong>Backend Development:</strong> Python, Java, C++, databases, and cloud deployment</li>
+                        <li><strong>Data Science & AI:</strong> Python, machine learning, TensorFlow, data visualization</li>
+                        <li><strong>Mobile Development:</strong> iOS, Android, and cross-platform frameworks</li>
+                    </ul>
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
+                        Each course combines video lectures, interactive coding exercises, real-world projects, and peer collaboration. Learn at your own pace with lifetime access to course materials, and receive recognized certificates upon completion to showcase your achievements to employers. Our instructors are active industry professionals who bring current best practices and techniques directly into the classroom.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="courses.html" class="btn btn-primary btn-lg" style="padding: 0.8rem 2.5rem; font-weight: 600;">
+                            <i class="fas fa-graduation-cap"></i> Browse Courses
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootcamps Section -->
+    <section id="bootcamps" class="bootcamps-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" id="bootcampsTitle">Intensive Bootcamps</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+                        <strong>🚀 Accelerate Your Career with Immersive Training</strong><br>
+                        Ready for a career transformation? Codify's intensive bootcamp programs are specifically designed for motivated learners who want to master programming skills rapidly and land a job in the tech industry. Our bootcamps are hands-on, immersive experiences that mirror real-world development environments.
+                    </p>
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+                        <strong>What Makes Our Bootcamps Different:</strong>
+                    </p>
+                    <ul style="font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem; margin-left: 2rem;">
+                        <li>Project-based curriculum with real-world capstone projects</li>
+                        <li>12-week structured learning path covering full-stack, mobile, or data science specializations</li>
+                        <li>Daily mentorship and 1-on-1 code reviews from industry experts</li>
+                        <li>Career coaching, resume building, and job placement assistance</li>
+                        <li>Networking opportunities with hiring partners and tech companies</li>
+                        <li>Collaborative learning environment with peer programming sessions</li>
+                    </ul>
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
+                        Our bootcamp graduates report an average salary increase of 60% within 6 months, with most securing tech jobs within 3 months of completion. Join our community of successful graduates who have transformed their careers!
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="bootcamps.html" class="btn btn-primary btn-lg" style="padding: 0.8rem 2.5rem; font-weight: 600;">
+                            <i class="fas fa-rocket"></i> Explore Bootcamps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="quiz-section py-5">
+        <div class="container">
+            <h2 class="section-title" id="quizTitle">Test Your Knowledge</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+                        <strong>❓ Challenge Yourself & Earn Recognition</strong><br>
+                        Learning programming isn't just about watching videos and reading documentation—it's about putting your knowledge into practice. Codify's sophisticated quiz platform helps you validate your understanding, identify knowledge gaps, and build confidence before tackling real projects.
+                    </p>
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+                        <strong>Why Take Our Quizzes:</strong>
+                    </p>
+                    <ul style="font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem; margin-left: 2rem;">
+                        <li>50+ expertly curated quizzes covering all programming levels</li>
+                        <li>Detailed explanations for each question to enhance learning</li>
+                        <li>Real-time progress tracking and personalized learning recommendations</li>
+                        <li>Badges and certificates for quiz completion</li>
+                        <li>Community leaderboards to challenge peers and stay motivated</li>
+                        <li>Prepare for technical interviews with job-readiness quizzes</li>
+                    </ul>
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
+                        Whether you're consolidating knowledge after a course, preparing for job interviews, or simply challenging yourself, our quizzes provide immediate feedback and insights. Earn certificates to showcase your expertise to potential employers!
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="quiz.html" class="btn btn-primary btn-lg" style="padding: 0.8rem 2.5rem; font-weight: 600;">
+                            <i class="fas fa-question-circle"></i> Start Quizzes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutors Section -->
+    <section id="tutors" class="tutors-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" id="tutorsTitle">Meet Our Expert Tutors</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+                        <strong>👨‍🏫 Learn From Industry Veterans</strong><br>
+                        One of the most valuable aspects of learning at Codify is the opportunity to learn directly from experienced professionals who work at leading tech companies. Our tutors bring real-world experience and current industry practices into every lesson they teach.
+                    </p>
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+                        <strong>Our Tutors Include:</strong>
+                    </p>
+                    <ul style="font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem; margin-left: 2rem;">
+                        <li>Senior software engineers from Google, Microsoft, Meta, and Amazon</li>
+                        <li>Full-stack developers with 10+ years of expertise</li>
+                        <li>Machine learning specialists and data science leaders</li>
+                        <li>UI/UX designers and product architects</li>
+                        <li>Startup founders and technical CTOs</li>
+                        <li>Open-source contributors and thought leaders</li>
+                    </ul>
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+                        Our tutors don't just teach concepts—they share their personal journey, insights into the tech industry, salary negotiations, career advancement strategies, and how to stand out in competitive job markets. Book 1-on-1 sessions for personalized guidance, code reviews, mock interviews, and mentorship.
+                    </p>
+                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
+                        With flexible scheduling and multiple specialization tracks, you'll find the perfect mentor to guide your programming journey and accelerate your career growth.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="tutors.html" class="btn btn-primary btn-lg" style="padding: 0.8rem 2.5rem; font-weight: 600;">
+                            <i class="fas fa-user-tie"></i> Meet All Tutors
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section py-5">
+        <div class="container">
+            <h2 class="section-title" id="featuresTitle">Why Choose Codify?</h2>
+            <div class="row" id="featuresList">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card" id="feature-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4 class="feature-heading">Expert Instructors</h4>
+                        <p class="feature-text">Learn from industry professionals with years of experience</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card" id="feature-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4 class="feature-heading">Learn at Your Pace</h4>
+                        <p class="feature-text">Flexible schedules that fit your busy lifestyle</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card" id="feature-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h4 class="feature-heading">Certifications</h4>
+                        <p class="feature-text">Earn recognized certificates to boost your career</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section bg-dark text-white py-5" id="footerSection">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4" id="footerCol-1">
+                    <h5 class="footer-heading">Codify</h5>
+                    <p class="footer-text">Empowering learners worldwide with quality programming education.</p>
+                </div>
+                <div class="col-md-3 mb-4" id="footerCol-2">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links" id="footerLinks">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="membership.html">Membership</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4" id="footerCol-3">
+                    <h5 class="footer-heading">Follow Us</h5>
+                    <div class="social-links" id="socialLinks">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4" id="footerCol-4">
+                    <h5 class="footer-heading">Contact</h5>
+                    <p class="footer-text">
+                        Email: <a href="mailto:info@codify.com">info@codify.com</a><br>
+                        Phone: <a href="tel:+1234567890">+1 (234) 567-890</a>
+                    </p>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="footer-copyright">&copy; 2026 Codify. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/index.js"></script>
+</body>
+</html>

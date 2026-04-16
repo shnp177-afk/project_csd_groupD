@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="faviconio-logo/logo.png" type="image/png">
+    <title>Membership Plans - Codify</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/mainstyle.css">
+    
+    <!-- Membership Specific CSS -->
+    <link rel="stylesheet" href="css/membership.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html" id="navbarBrand">
+                <img src="faviconio-logo/logo.png" alt="Codify Logo" class="navbar-logo">
+                <strong>Codify</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="navbarToggle">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" id="navbarMenu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bootcamps.html">Bootcamps</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tutors.html">Tutors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="quiz.html">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="membership.html" id="membershipLink">Membership</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header py-5 bg-primary text-white">
+        <div class="container">
+            <h1 class="display-4" id="pageTitle">Choose Your Learning Plan</h1>
+            <p class="lead" id="pageSubtitle">Select a membership plan and start your coding journey today</p>
+        </div>
+    </section>
+
+    <!-- Membership Plans -->
+    <section class="membership-section py-5">
+        <div class="container">
+            <h2 class="section-title mb-5" id="plansTitle">Our Membership Plans</h2>
+            <div class="row" id="membershipPlans">
+                <!-- Plans will be dynamically inserted -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Signup Form Section -->
+    <section class="form-section py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="form-card" id="signupCard">
+                        <h2 class="form-title" id="formTitle">Complete Your Registration</h2>
+                        <p class="form-subtitle" id="formSubtitle">Fill in the details below to activate your membership</p>
+                        
+                        <form id="membershipForm" name="membershipForm" class="form-group-wrapper">
+                            <!-- Full Name -->
+                            <div class="mb-3" id="fullNameGroup">
+                                <label for="fullName" class="form-label">Full Name <span class="required">*</span></label>
+                                <input type="text" class="form-control form-input" id="fullName" 
+                                       name="fullName" placeholder="Enter your full name" required>
+                                <div class="invalid-feedback" id="fullNameError">
+                                    Full name is required and must contain at least 3 characters
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3" id="emailGroup">
+                                <label for="email" class="form-label">Email Address <span class="required">*</span></label>
+                                <input type="email" class="form-control form-input" id="email" 
+                                       name="email" placeholder="Enter your email address" required>
+                                <div class="invalid-feedback" id="emailError">
+                                    Please enter a valid email address (e.g., user@example.com)
+                                </div>
+                            </div>
+
+                            <!-- Gender -->
+                            <div class="mb-3" id="genderGroup">
+                                <label for="gender" class="form-label">Gender <span class="required">*</span></label>
+                                <select class="form-control form-input" id="gender" name="gender" required>
+                                    <option value="">Select your gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="prefer_not_to_say">Prefer not to say😁</option>
+                                </select>
+                                <div class="invalid-feedback" id="genderError"> 
+                                    Please select your gender               
+                            </div>
+
+                            <!-- Course Selection -->
+                            <div class="mb-3" id="courseGroup">
+                                <label for="course" class="form-label">Select Course <span class="required">*</span></label>
+                                <select class="form-control form-input" id="course" name="course" required>
+                                    <option value="">Choose a course</option>
+                                    <option value="html-css">HTML & CSS Fundamentals</option>
+                                    <option value="javascript">JavaScript Mastery</option>
+                                    <option value="react">React.js Development</option>
+                                    <option value="python">Python for Data Science</option>
+                                    <option value="nodejs">Node.js & Express</option>
+                                    <option value="fullstack">Full Stack Development</option>
+                                </select>
+                                <div class="invalid-feedback" id="courseError">
+                                    Please select a course
+                                </div>
+                            </div>
+
+                            <!-- Expected Course Duration -->
+                            <div class="mb-3" id="durationGroup">
+                                <label for="duration" class="form-label">Expected Course Duration <span class="required">*</span></label>
+                                <select class="form-control form-input" id="duration" name="duration" required>
+                                    <option value="">Select duration</option>
+                                    <option value="4-weeks">4 Weeks</option>
+                                    <option value="8-weeks">8 Weeks</option>
+                                    <option value="12-weeks">12 Weeks</option>
+                                    <option value="16-weeks">16 Weeks</option>
+                                    <option value="20-weeks">20+ Weeks</option>
+                                </select>
+                                <div class="invalid-feedback" id="durationError">
+                                    Please select a duration
+                                </div>
+                            </div>
+
+                            <!-- Terms Checkbox -->
+                            <div class="mb-3 form-check" id="termsGroup">
+                                <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                                <label class="form-check-label" for="terms">
+                                    I agree to the <a href="#">Terms and Conditions</a> <span class="required">*</span>
+                                </label>
+                                <div class="invalid-feedback" id="termsError">
+                                    You must agree to the terms and conditions
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid gap-2 mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                                    <i class="fas fa-check-circle"></i> Complete Registration
+                                </button>
+                            </div>
+
+                            <!-- Clear Button -->
+                            <div class="d-grid gap-2">
+                                <button type="reset" class="btn btn-outline-secondary" id="clearBtn">
+                                    <i class="fas fa-redo"></i> Clear Form
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Success Message -->
+                        <div id="successMessage" class="alert alert-success mt-4" style="display: none;">
+                            <i class="fas fa-check-circle"></i>
+                            <strong> Registration Successful!</strong> Your membership is now active. Check your email for further details.
+                        </div>
+
+                        <!-- Error Message -->
+                        <div id="errorMessage" class="alert alert-danger mt-4" style="display: none;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <strong> Registration Failed!</strong> <span id="errorText"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section bg-dark text-white py-5" id="footerSection">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4" id="footerCol-1">
+                    <h5 class="footer-heading">Codify</h5>
+                    <p class="footer-text">Empowering learners worldwide with quality programming education.</p>
+                </div>
+                <div class="col-md-3 mb-4" id="footerCol-2">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links" id="footerLinks">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#courses">Courses</a></li>
+                        <li><a href="membership.html">Membership</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4" id="footerCol-3">
+                    <h5 class="footer-heading">Follow Us</h5>
+                    <div class="social-links" id="socialLinks">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4" id="footerCol-4">
+                    <h5 class="footer-heading">Contact</h5>
+                    <p class="footer-text">
+                        Email: <a href="mailto:info@codify.com">info@codify.com</a><br>
+                        Phone: <a href="tel:+1234567890">+1 (234) 567-890</a>
+                    </p>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="footer-copyright">&copy; 2026 Codify. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/membership.js"></script>
+</body>
+</html>
