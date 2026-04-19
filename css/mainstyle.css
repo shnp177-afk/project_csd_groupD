@@ -76,20 +76,20 @@ a:hover {
 }
 
 .navbar-logo {
-    height: 40px;
-    width: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    object-fit: contain;
-    padding: 3px;
-    background-color: rgba(255, 255, 255, 0.2);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    object-fit: cover;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
     transition: all 0.3s ease;
 }
 
 .navbar-brand:hover .navbar-logo {
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-    transform: scale(1.1);
-    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+    transform: scale(1.08);
+    background-color: rgba(255, 255, 255, 0.35);
 }
 
 .nav-link {
@@ -114,7 +114,8 @@ a:hover {
 
 /* ===== Hero Section ===== */
 .hero-section {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.75), rgba(0, 86, 179, 0.8)), url('../images/bg_image_homepage_herosection.jpg') center/cover no-repeat;
+    background-blend-mode: overlay;
     color: white;
     position: relative;
     overflow: hidden;
@@ -166,18 +167,18 @@ a:hover {
 }
 
 .floating-card {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
+    background: url('../images/bg_image_herosection.webp') center/cover no-repeat;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
     width: 300px;
     height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 6rem;
     color: white;
     animation: float 3s ease-in-out infinite;
-    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
 }
 
 @keyframes slideInLeft {
@@ -208,6 +209,94 @@ a:hover {
     }
     50% {
         transform: translateY(-20px);
+    }
+}
+
+.section-text-panel {
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    max-width: 700px;
+    margin: 0 auto;
+    max-height: 520px;
+    overflow-y: auto;
+}
+
+.section-text-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.section-text-panel::-webkit-scrollbar-thumb {
+    background: rgba(0, 123, 255, 0.4);
+    border-radius: 999px;
+}
+
+.section-text-panel::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.section-description {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #444;
+    margin-bottom: 1.3rem;
+}
+
+.section-side-image {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 24px;
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.12);
+    transition: transform 0.4s ease;
+    object-fit: contain;
+}
+
+.section-side-image:hover {
+    transform: translateY(-6px);
+}
+
+.section-bullet-list {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #555;
+    margin-bottom: 1.5rem;
+    margin-left: 1.25rem;
+}
+
+.section-bullet-list li {
+    margin-bottom: 0.75rem;
+}
+
+.btn-cta {
+    padding: 0.8rem 2.5rem;
+    font-weight: 600;
+}
+
+@media (max-width: 991.98px) {
+    .section-text-panel {
+        padding: 1.75rem;
+    }
+
+    .section-side-image {
+        max-width: 100%;
+        margin-top: 1.75rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .section-text-panel {
+        padding: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
     }
 }
 
@@ -322,15 +411,24 @@ a:hover {
 .feature-card {
     background-color: var(--light-color);
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 20px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
+    overflow: hidden;
 }
 
 .feature-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
+}
+
+.feature-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
 }
 
 .feature-icon {
@@ -471,6 +569,28 @@ a:hover {
 
 .cookie-buttons .btn {
     margin: 0;
+}
+
+.cookie-warning {
+    background-color: rgba(255, 169, 0, 0.95);
+    color: #1f1f1f;
+}
+
+.cookie-warning .cookie-title i {
+    color: #1f1f1f;
+}
+
+.cookie-warning .cookie-text {
+    opacity: 1;
+}
+
+.cookie-warning .btn-outline-light {
+    color: #1f1f1f;
+    border-color: rgba(31, 31, 31, 0.45);
+}
+
+.cookie-warning .btn-outline-light:hover {
+    background-color: rgba(31, 31, 31, 0.08);
 }
 
 /* ===== Membership Section ===== */

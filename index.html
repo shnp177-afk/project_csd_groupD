@@ -32,6 +32,20 @@
         </div>
     </div>
 
+    <!-- Cookie Reject Warning Popup -->
+    <div id="cookieWarning" class="cookie-consent cookie-warning">
+        <div class="cookie-content">
+            <h5 class="cookie-title">
+                <i class="fas fa-exclamation-triangle"></i> Please Consider Accepting Cookies
+            </h5>
+            <p class="cookie-text">Cookies help us deliver a better experience, personalize content, and keep the site running smoothly. Please accept cookies for the best browsing experience.</p>
+            <div class="cookie-buttons">
+                <button id="acceptAnyway" class="btn btn-primary btn-sm">Accept Anyway</button>
+                <button id="dismissWarning" class="btn btn-outline-light btn-sm">No Thanks</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
@@ -101,26 +115,31 @@
     <section id="courses" class="courses-section py-5">
         <div class="container">
             <h2 class="section-title" id="coursesTitle">Our Popular Courses</h2>
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
-                        <strong>🎓 Master In-Demand Programming Skills</strong><br>
-                        Codify's extensive course collection is meticulously designed for everyone—from absolute beginners taking their first steps in programming to experienced developers looking to expand their expertise. Our curriculum covers the full spectrum of modern web and software development, including:
-                    </p>
-                    <ul style="font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem; margin-left: 2rem;">
-                        <li><strong>Web Development:</strong> HTML5, CSS3, JavaScript, React.js, Vue.js, Angular, Node.js</li>
-                        <li><strong>Backend Development:</strong> Python, Java, C++, databases, and cloud deployment</li>
-                        <li><strong>Data Science & AI:</strong> Python, machine learning, TensorFlow, data visualization</li>
-                        <li><strong>Mobile Development:</strong> iOS, Android, and cross-platform frameworks</li>
-                    </ul>
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
-                        Each course combines video lectures, interactive coding exercises, real-world projects, and peer collaboration. Learn at your own pace with lifetime access to course materials, and receive recognized certificates upon completion to showcase your achievements to employers. Our instructors are active industry professionals who bring current best practices and techniques directly into the classroom.
-                    </p>
-                    <div style="text-align: center;">
-                        <a href="courses.html" class="btn btn-primary btn-lg" style="padding: 0.8rem 2.5rem; font-weight: 600;">
-                            <i class="fas fa-graduation-cap"></i> Browse Courses
-                        </a>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="section-text-panel">
+                        <p class="section-description">
+                            <strong>🎓 Master In-Demand Programming Skills</strong><br>
+                            Codify's extensive course collection is meticulously designed for everyone—from absolute beginners taking their first steps in programming to experienced developers looking to expand their expertise. Our curriculum covers the full spectrum of modern web and software development, including:
+                        </p>
+                        <ul class="section-bullet-list">
+                            <li><strong>Web Development:</strong> HTML5, CSS3, JavaScript, React.js, Vue.js, Angular, Node.js</li>
+                            <li><strong>Backend Development:</strong> Python, Java, C++, databases, and cloud deployment</li>
+                            <li><strong>Data Science & AI:</strong> Python, machine learning, TensorFlow, data visualization</li>
+                            <li><strong>Mobile Development:</strong> iOS, Android, and cross-platform frameworks</li>
+                        </ul>
+                        <p class="section-description">
+                            Each course combines video lectures, interactive coding exercises, real-world projects, and peer collaboration. Learn at your own pace with lifetime access to course materials, and receive recognized certificates upon completion to showcase your achievements to employers. Our instructors are active industry professionals who bring current best practices and techniques directly into the classroom.
+                        </p>
+                        <div class="text-center">
+                            <a href="courses.html" class="btn btn-primary btn-lg btn-cta">
+                                <i class="fas fa-graduation-cap"></i> Browse Courses
+                            </a>
+                        </div>
                     </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="images/bg_image_courses.jpg" alt="Popular Courses" class="section-side-image">
                 </div>
             </div>
         </div>
@@ -130,31 +149,36 @@
     <section id="bootcamps" class="bootcamps-section py-5 bg-light">
         <div class="container">
             <h2 class="section-title" id="bootcampsTitle">Intensive Bootcamps</h2>
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
-                        <strong>🚀 Accelerate Your Career with Immersive Training</strong><br>
-                        Ready for a career transformation? Codify's intensive bootcamp programs are specifically designed for motivated learners who want to master programming skills rapidly and land a job in the tech industry. Our bootcamps are hands-on, immersive experiences that mirror real-world development environments.
-                    </p>
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
-                        <strong>What Makes Our Bootcamps Different:</strong>
-                    </p>
-                    <ul style="font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem; margin-left: 2rem;">
-                        <li>Project-based curriculum with real-world capstone projects</li>
-                        <li>12-week structured learning path covering full-stack, mobile, or data science specializations</li>
-                        <li>Daily mentorship and 1-on-1 code reviews from industry experts</li>
-                        <li>Career coaching, resume building, and job placement assistance</li>
-                        <li>Networking opportunities with hiring partners and tech companies</li>
-                        <li>Collaborative learning environment with peer programming sessions</li>
-                    </ul>
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
-                        Our bootcamp graduates report an average salary increase of 60% within 6 months, with most securing tech jobs within 3 months of completion. Join our community of successful graduates who have transformed their careers!
-                    </p>
-                    <div style="text-align: center;">
-                        <a href="bootcamps.html" class="btn btn-primary btn-lg" style="padding: 0.8rem 2.5rem; font-weight: 600;">
-                            <i class="fas fa-rocket"></i> Explore Bootcamps
-                        </a>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="section-text-panel">
+                        <p class="section-description">
+                            <strong>🚀 Accelerate Your Career with Immersive Training</strong><br>
+                            Ready for a career transformation? Codify's intensive bootcamp programs are specifically designed for motivated learners who want to master programming skills rapidly and land a job in the tech industry. Our bootcamps are hands-on, immersive experiences that mirror real-world development environments.
+                        </p>
+                        <p class="section-description">
+                            <strong>What Makes Our Bootcamps Different:</strong>
+                        </p>
+                        <ul class="section-bullet-list">
+                            <li>Project-based curriculum with real-world capstone projects</li>
+                            <li>12-week structured learning path covering full-stack, mobile, or data science specializations</li>
+                            <li>Daily mentorship and 1-on-1 code reviews from industry experts</li>
+                            <li>Career coaching, resume building, and job placement assistance</li>
+                            <li>Networking opportunities with hiring partners and tech companies</li>
+                            <li>Collaborative learning environment with peer programming sessions</li>
+                        </ul>
+                        <p class="section-description">
+                            Our bootcamp graduates report an average salary increase of 60% within 6 months, with most securing tech jobs within 3 months of completion. Join our community of successful graduates who have transformed their careers!
+                        </p>
+                        <div class="text-center">
+                            <a href="bootcamps.html" class="btn btn-primary btn-lg btn-cta">
+                                <i class="fas fa-rocket"></i> Explore Bootcamps
+                            </a>
+                        </div>
                     </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="images/bg_image_bootcamps.jpg" alt="Intensive Bootcamps" class="section-side-image">
                 </div>
             </div>
         </div>
@@ -164,31 +188,36 @@
     <section id="quiz" class="quiz-section py-5">
         <div class="container">
             <h2 class="section-title" id="quizTitle">Test Your Knowledge</h2>
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
-                        <strong>❓ Challenge Yourself & Earn Recognition</strong><br>
-                        Learning programming isn't just about watching videos and reading documentation—it's about putting your knowledge into practice. Codify's sophisticated quiz platform helps you validate your understanding, identify knowledge gaps, and build confidence before tackling real projects.
-                    </p>
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
-                        <strong>Why Take Our Quizzes:</strong>
-                    </p>
-                    <ul style="font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem; margin-left: 2rem;">
-                        <li>50+ expertly curated quizzes covering all programming levels</li>
-                        <li>Detailed explanations for each question to enhance learning</li>
-                        <li>Real-time progress tracking and personalized learning recommendations</li>
-                        <li>Badges and certificates for quiz completion</li>
-                        <li>Community leaderboards to challenge peers and stay motivated</li>
-                        <li>Prepare for technical interviews with job-readiness quizzes</li>
-                    </ul>
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
-                        Whether you're consolidating knowledge after a course, preparing for job interviews, or simply challenging yourself, our quizzes provide immediate feedback and insights. Earn certificates to showcase your expertise to potential employers!
-                    </p>
-                    <div style="text-align: center;">
-                        <a href="quiz.html" class="btn btn-primary btn-lg" style="padding: 0.8rem 2.5rem; font-weight: 600;">
-                            <i class="fas fa-question-circle"></i> Start Quizzes
-                        </a>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="section-text-panel">
+                        <p class="section-description">
+                            <strong>❓ Challenge Yourself & Earn Recognition</strong><br>
+                            Learning programming isn't just about watching videos and reading documentation—it's about putting your knowledge into practice. Codify's sophisticated quiz platform helps you validate your understanding, identify knowledge gaps, and build confidence before tackling real projects.
+                        </p>
+                        <p class="section-description">
+                            <strong>Why Take Our Quizzes:</strong>
+                        </p>
+                        <ul class="section-bullet-list">
+                            <li>50+ expertly curated quizzes covering all programming levels</li>
+                            <li>Detailed explanations for each question to enhance learning</li>
+                            <li>Real-time progress tracking and personalized learning recommendations</li>
+                            <li>Badges and certificates for quiz completion</li>
+                            <li>Community leaderboards to challenge peers and stay motivated</li>
+                            <li>Prepare for technical interviews with job-readiness quizzes</li>
+                        </ul>
+                        <p class="section-description">
+                            Whether you're consolidating knowledge after a course, preparing for job interviews, or simply challenging yourself, our quizzes provide immediate feedback and insights. Earn certificates to showcase your expertise to potential employers!
+                        </p>
+                        <div class="text-center">
+                            <a href="quiz.html" class="btn btn-primary btn-lg btn-cta">
+                                <i class="fas fa-question-circle"></i> Start Quizzes
+                            </a>
+                        </div>
                     </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="images/bg_image_quiz.jpg" alt="Test Your Knowledge" class="section-side-image">
                 </div>
             </div>
         </div>
@@ -198,34 +227,39 @@
     <section id="tutors" class="tutors-section py-5 bg-light">
         <div class="container">
             <h2 class="section-title" id="tutorsTitle">Meet Our Expert Tutors</h2>
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
-                        <strong>👨‍🏫 Learn From Industry Veterans</strong><br>
-                        One of the most valuable aspects of learning at Codify is the opportunity to learn directly from experienced professionals who work at leading tech companies. Our tutors bring real-world experience and current industry practices into every lesson they teach.
-                    </p>
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
-                        <strong>Our Tutors Include:</strong>
-                    </p>
-                    <ul style="font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem; margin-left: 2rem;">
-                        <li>Senior software engineers from Google, Microsoft, Meta, and Amazon</li>
-                        <li>Full-stack developers with 10+ years of expertise</li>
-                        <li>Machine learning specialists and data science leaders</li>
-                        <li>UI/UX designers and product architects</li>
-                        <li>Startup founders and technical CTOs</li>
-                        <li>Open-source contributors and thought leaders</li>
-                    </ul>
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
-                        Our tutors don't just teach concepts—they share their personal journey, insights into the tech industry, salary negotiations, career advancement strategies, and how to stand out in competitive job markets. Book 1-on-1 sessions for personalized guidance, code reviews, mock interviews, and mentorship.
-                    </p>
-                    <p class="section-description" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
-                        With flexible scheduling and multiple specialization tracks, you'll find the perfect mentor to guide your programming journey and accelerate your career growth.
-                    </p>
-                    <div style="text-align: center;">
-                        <a href="tutors.html" class="btn btn-primary btn-lg" style="padding: 0.8rem 2.5rem; font-weight: 600;">
-                            <i class="fas fa-user-tie"></i> Meet All Tutors
-                        </a>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="section-text-panel">
+                        <p class="section-description">
+                            <strong>👨‍🏫 Learn From Industry Veterans</strong><br>
+                            One of the most valuable aspects of learning at Codify is the opportunity to learn directly from experienced professionals who work at leading tech companies. Our tutors bring real-world experience and current industry practices into every lesson they teach.
+                        </p>
+                        <p class="section-description">
+                            <strong>Our Tutors Include:</strong>
+                        </p>
+                        <ul class="section-bullet-list">
+                            <li>Senior software engineers from Google, Microsoft, Meta, and Amazon</li>
+                            <li>Full-stack developers with 10+ years of expertise</li>
+                            <li>Machine learning specialists and data science leaders</li>
+                            <li>UI/UX designers and product architects</li>
+                            <li>Startup founders and technical CTOs</li>
+                            <li>Open-source contributors and thought leaders</li>
+                        </ul>
+                        <p class="section-description">
+                            Our tutors don't just teach concepts—they share their personal journey, insights into the tech industry, salary negotiations, career advancement strategies, and how to stand out in competitive job markets. Book 1-on-1 sessions for personalized guidance, code reviews, mock interviews, and mentorship.
+                        </p>
+                        <p class="section-description">
+                            With flexible scheduling and multiple specialization tracks, you'll find the perfect mentor to guide your programming journey and accelerate your career growth.
+                        </p>
+                        <div class="text-center">
+                            <a href="tutors.html" class="btn btn-primary btn-lg btn-cta">
+                                <i class="fas fa-user-tie"></i> Meet All Tutors
+                            </a>
+                        </div>
                     </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="images/bg_image_tutor.jpg" alt="Expert Tutors" class="section-side-image">
                 </div>
             </div>
         </div>
@@ -238,8 +272,9 @@
             <div class="row" id="featuresList">
                 <div class="col-md-4 mb-4">
                     <div class="feature-card" id="feature-1">
+                        <img src="images/bg_image_expert_instructors.webp" alt="Expert Instructors" class="feature-image">
                         <div class="feature-icon">
-                            <i class="fas fa-graduation-cap"></i>
+                            <i class="fas fa-user-tie"></i>
                         </div>
                         <h4 class="feature-heading">Expert Instructors</h4>
                         <p class="feature-text">Learn from industry professionals with years of experience</p>
@@ -247,6 +282,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="feature-card" id="feature-2">
+                        <img src="images/bg_image_timing.jpg" alt="Learn at Your Pace" class="feature-image">
                         <div class="feature-icon">
                             <i class="fas fa-clock"></i>
                         </div>
@@ -256,6 +292,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="feature-card" id="feature-3">
+                        <img src="images/bg_image_certification.webp" alt="Certifications" class="feature-image">
                         <div class="feature-icon">
                             <i class="fas fa-certificate"></i>
                         </div>

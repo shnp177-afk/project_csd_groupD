@@ -17,10 +17,20 @@
 
 /* ===== Page Header ===== */
 .page-header {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.85), rgba(0, 86, 179, 0.95));
     position: relative;
     overflow: hidden;
     padding: 5rem 2rem !important;
+    min-height: 480px;
+}
+
+.membership-hero-image {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.22);
+    object-fit: contain;
 }
 
 .page-header::before {
