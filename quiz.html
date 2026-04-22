@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codify | Quiz</title>
+  <meta name="description" content="Test your coding skills with topic-based quizzes in HTML, CSS, JavaScript, Python, C, and C++." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08111f;
+      --bg-2: #0d1728;
+      --line: rgba(255,255,255,0.08);
+      --text: #ecf3ff;
+      --muted: #aebdd8;
+      --accent: #5aa2ff;
+      --accent-2: #7b61ff;
+      --success: #1fbd72;
+      --danger: #ff6c7f;
+      --warning: #ffc857;
+      --shadow: 0 18px 44px rgba(0,0,0,0.28);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(90,162,255,0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(123,97,255,0.12), transparent 26%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      line-height: 1.6;
+    }
+
+    .custom-navbar {
+      background: rgba(8, 14, 24, 0.84);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 118px;
+      height: 78px;
+      border-radius: 12px;
+      object-fit: contain;
+      object-position: center;
+      background: rgba(11, 18, 32, 0.92);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.08);
+      padding: 5px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: none;
+    }
+
+    .navbar .nav-link {
+      color: var(--muted);
+      font-weight: 600;
+      transition: color .25s ease;
+    }
+
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active {
+      color: white;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 0.2rem rgba(90,162,255,0.18);
+    }
+
+    .section-space { padding: 72px 0; }
+
+    .quiz-hero {
+      position: relative;
+      padding: 90px 0 56px;
+      overflow: hidden;
+    }
+
+    .code-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(90,162,255,0.12), transparent 20%),
+        radial-gradient(circle at 84% 16%, rgba(123,97,255,0.14), transparent 22%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-badge,
+    .difficulty-badge,
+    .topic-pill,
+    .result-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .hero-badge {
+      background: rgba(90,162,255,0.12);
+      color: #a9ceff;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 3.7rem);
+      line-height: 1.05;
+      font-weight: 700;
+      max-width: 760px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title .accent { color: #ffd257; }
+
+    .hero-desc {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1.04rem;
+      margin-bottom: 24px;
+    }
+
+    .hero-stats { margin-top: 18px; }
+
+    .hero-card,
+    .setup-card,
+    .quiz-card,
+    .info-card,
+    .result-card,
+    .review-card,
+    .empty-card {
+      background: linear-gradient(180deg, rgba(18, 27, 44, 0.96), rgba(12, 18, 30, 0.98));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card,
+    .setup-card,
+    .quiz-card,
+    .info-card,
+    .result-card,
+    .review-card,
+    .empty-card {
+      padding: 24px;
+    }
+
+    .stat-box {
+      height: 100%;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+    }
+
+    .stat-box h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .stat-box p,
+    .section-title p,
+    .setup-card p,
+    .info-card p,
+    .review-text,
+    .result-card p,
+    .empty-card p {
+      color: var(--muted);
+    }
+
+    .section-title {
+      margin-bottom: 24px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .topic-grid,
+    .difficulty-grid,
+    .quiz-meta-grid,
+    .review-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .topic-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .difficulty-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .quiz-meta-grid {
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 18px;
+    }
+
+    .review-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .topic-btn,
+    .difficulty-btn,
+    .answer-btn,
+    .action-btn,
+    .secondary-btn {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font-weight: 700;
+      padding: 14px 16px;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+
+    .topic-btn:hover,
+    .difficulty-btn:hover,
+    .answer-btn:hover,
+    .action-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(90,162,255,0.35);
+      background: rgba(90,162,255,0.08);
+    }
+
+    .topic-btn.active,
+    .difficulty-btn.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 12px 24px rgba(90,162,255,0.18);
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border: none;
+      color: white;
+      box-shadow: 0 12px 28px rgba(90,162,255,0.24);
+    }
+
+    .secondary-btn {
+      background: transparent;
+    }
+
+    .quiz-progress-wrap {
+      margin-bottom: 20px;
+    }
+
+    .quiz-progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .progress {
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .question-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .answers-wrap {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .answer-btn {
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .answer-btn.correct {
+      background: rgba(31,189,114,0.12);
+      border-color: rgba(31,189,114,0.35);
+      color: #c9ffe2;
+    }
+
+    .answer-btn.wrong {
+      background: rgba(255,108,127,0.12);
+      border-color: rgba(255,108,127,0.35);
+      color: #ffd5db;
+    }
+
+    .answer-btn.locked {
+      pointer-events: none;
+      opacity: 1;
+    }
+
+    .feedback-box {
+      display: none;
+      margin-top: 10px;
+      padding: 16px;
+      border-radius: 16px;
+      border-left: 4px solid var(--accent);
+      background: rgba(90,162,255,0.08);
+    }
+
+    .feedback-box.success {
+      border-left-color: var(--success);
+      background: rgba(31,189,114,0.10);
+    }
+
+    .feedback-box.error {
+      border-left-color: var(--danger);
+      background: rgba(255,108,127,0.10);
+    }
+
+    .quiz-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .meta-box {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      height: 100%;
+    }
+
+    .meta-box strong,
+    .review-card h5,
+    .result-card h3,
+    .result-card h4 {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .difficulty-badge.beginner { background: rgba(31,189,114,0.12); color: #8ce1b5; }
+    .difficulty-badge.intermediate { background: rgba(255,200,87,0.13); color: #ffd77d; }
+    .difficulty-badge.advanced { background: rgba(255,108,127,0.13); color: #ffb8c3; }
+
+    .result-card,
+    .review-card,
+    .empty-card { display: none; }
+
+    .result-score {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .result-chip {
+      background: rgba(90,162,255,0.10);
+      color: #add1ff;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    .tip-list {
+      padding-left: 18px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .site-footer {
+      background: rgba(5, 9, 15, 0.95);
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 50px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .footer-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      background: #0b1220;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a, .footer-text, .copyright, .footer-links span { color: var(--muted); }
+    .footer-links a:hover { color: white; }
+    .footer-line { border-color: var(--line); margin: 28px 0 16px; }
+
+    @media (max-width: 991px) {
+      .topic-grid,
+      .difficulty-grid,
+      .quiz-meta-grid,
+      .review-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .quiz-hero { padding: 72px 0 48px; }
+      .section-space { padding: 56px 0; }
+      .hero-title { font-size: 2rem; }
+      .hero-card,
+      .setup-card,
+      .quiz-card,
+      .info-card,
+      .result-card,
+      .review-card,
+      .empty-card { padding: 20px; }
+      .topic-grid,
+      .difficulty-grid,
+      .quiz-meta-grid,
+      .review-grid { grid-template-columns: 1fr; }
+      .brand-text { font-size: 1.4rem; }
+      .brand-logo { width: 96px; height: 64px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+  <div class="container">
+    <a class="navbar-brand brand-wrap" href="index.html">
+      <img src="images/codifylogo.jpeg" alt="Codify logo" class="brand-logo">
+      <span class="brand-text">Codify</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+        <li class="nav-item"><a class="nav-link" href="bootcamps.html">Bootcamps</a></li>
+        <li class="nav-item"><a class="nav-link" href="tutors.html">Tutors</a></li>
+        <li class="nav-item"><a class="nav-link" href="quiz.html">Quiz</a></li>
+        <li class="nav-item"><a class="nav-link" href="membership.html">Membership</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <main>
+    <section class="quiz-hero">
+      <div class="code-glow"></div>
+      <div class="container hero-content">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <span class="hero-badge">Quiz Lab • Instant Feedback • Smart Practice</span>
+            <h1 class="hero-title">Test your <span class="accent">coding skills</span> and learn from every answer.</h1>
+            <p class="hero-desc">Choose a topic, set your level, and practice with focused questions, instant explanations, and progress tracking designed to help you improve faster.</p>
+            <div class="hero-stats row g-3">
+              <div class="col-6 col-md-4"><div class="stat-box"><h3>6</h3><p>Quiz Topics</p></div></div>
+              <div class="col-6 col-md-4"><div class="stat-box"><h3>3</h3><p>Difficulty Levels</p></div></div>
+              <div class="col-6 col-md-4"><div class="stat-box"><h3>Instant</h3><p>Feedback Mode</p></div></div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="hero-card">
+              <h4 class="mb-3">How it works</h4>
+              <div class="d-grid gap-3">
+                <div class="meta-box"><strong>1. Pick a topic</strong><span>Choose HTML, CSS, JavaScript, Python, C, or C++.</span></div>
+                <div class="meta-box"><strong>2. Start the quiz</strong><span>Answer one question at a time with clear focus.</span></div>
+                <div class="meta-box"><strong>3. Learn instantly</strong><span>See explanations, score, and what to improve next.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="container">
+        <div class="section-title">
+          <h2>Set up your quiz</h2>
+          <p>Make the quiz feel personal and useful. Pick your topic, choose your difficulty, and start practicing with a clean learning flow.</p>
+        </div>
+
+        <div class="setup-card mb-4">
+          <h4 class="mb-3">Choose a topic</h4>
+          <div class="topic-grid mb-4" id="topicGrid">
+            <button class="topic-btn active" data-topic="html">HTML</button>
+            <button class="topic-btn" data-topic="css">CSS</button>
+            <button class="topic-btn" data-topic="javascript">JavaScript</button>
+            <button class="topic-btn" data-topic="python">Python</button>
+            <button class="topic-btn" data-topic="c">C</button>
+            <button class="topic-btn" data-topic="cpp">C++</button>
+          </div>
+
+          <h4 class="mb-3">Choose difficulty</h4>
+          <div class="difficulty-grid mb-4" id="difficultyGrid">
+            <button class="difficulty-btn active" data-level="beginner">Beginner</button>
+            <button class="difficulty-btn" data-level="intermediate">Intermediate</button>
+            <button class="difficulty-btn" data-level="advanced">Advanced</button>
+          </div>
+
+          <div class="d-flex flex-wrap gap-3">
+            <button id="startQuizBtn" class="action-btn">Start Quiz</button>
+            <button id="resetQuizBtn" class="secondary-btn">Reset</button>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="quiz-card" id="quizCard">
+              <div class="quiz-progress-wrap">
+                <div class="quiz-progress-top">
+                  <span id="questionCount">Question 1 of 5</span>
+                  <span id="quizTopicInfo">HTML • Beginner</span>
+                </div>
+                <div class="progress">
+                  <div id="quizProgressBar" class="progress-bar" role="progressbar" style="width: 20%"></div>
+                </div>
+              </div>
+
+              <div class="quiz-meta-grid">
+                <div class="meta-box"><strong id="metaTopic">HTML</strong><span>Topic</span></div>
+                <div class="meta-box"><strong id="metaLevel">Beginner</strong><span>Difficulty</span></div>
+                <div class="meta-box"><strong id="metaScore">0</strong><span>Score</span></div>
+                <div class="meta-box"><strong id="metaRemaining">5</strong><span>Remaining</span></div>
+              </div>
+
+              <h3 class="question-title" id="questionText">Press start to begin your quiz.</h3>
+              <div class="answers-wrap" id="answersWrap"></div>
+
+              <div class="feedback-box" id="feedbackBox">
+                <strong id="feedbackTitle">Feedback</strong>
+                <p class="mb-0" id="feedbackText"></p>
+              </div>
+
+              <div class="quiz-actions">
+                <button class="secondary-btn" id="nextQuestionBtn" disabled>Next Question</button>
+                <button class="secondary-btn" id="finishQuizBtn" disabled>Finish Quiz</button>
+              </div>
+            </div>
+
+            <div class="result-card mt-4" id="resultCard">
+              <h3>Quiz completed</h3>
+              <div class="result-score" id="finalScoreText">0 / 5</div>
+              <p id="resultSummary">You finished the quiz.</p>
+              <div class="mb-3">
+                <span class="result-chip" id="resultTopicChip">Topic</span>
+                <span class="result-chip" id="resultLevelChip">Level</span>
+                <span class="result-chip" id="resultPercentChip">0%</span>
+              </div>
+              <h4 class="mb-2">Recommended next step</h4>
+              <p id="recommendationText">Keep practicing.</p>
+              <div class="d-flex flex-wrap gap-3 mt-3">
+                <button class="action-btn" id="retryQuizBtn">Retry Quiz</button>
+                <button class="secondary-btn" id="reviewAnswersBtn">Review Wrong Answers</button>
+              </div>
+            </div>
+
+            <div class="review-card mt-4" id="reviewCard">
+              <h4 class="mb-3">Wrong answer review</h4>
+              <div id="reviewList" class="review-grid"></div>
+            </div>
+
+            <div class="empty-card mt-4" id="emptyReviewCard">
+              <h4 class="mb-2">Great job</h4>
+              <p class="mb-0">You got every question right in this round. Try a harder level next.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="info-card mb-4">
+              <h4 class="mb-3">Why this quiz helps</h4>
+              <ul class="tip-list">
+                <li>One question at a time keeps the page easy to use.</li>
+                <li>Instant feedback teaches, not just tests.</li>
+                <li>Topic and level selection make practice more focused.</li>
+                <li>Wrong-answer review helps users improve faster.</li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h4 class="mb-3">Learning tips</h4>
+              <p class="mb-2">Use the quiz as a practice tool, not just a score tool.</p>
+              <ul class="tip-list">
+                <li>Read the explanation after every answer.</li>
+                <li>Retry the same topic until the ideas feel easy.</li>
+                <li>Move up from beginner to intermediate gradually.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="images/codifylogo.jpeg" alt="Codify logo" class="footer-logo">
+            <span class="brand-text">Codify</span>
+          </div>
+          <p class="footer-text">Sharpen your coding skills with clean, focused quizzes and a learner-friendly tech-first experience.</p>
+        </div>
+        <div class="col-md-4 col-lg-2">
+          <h5>Practice</h5>
+          <ul class="footer-links">
+            <li><a href="quiz.html">HTML Quiz</a></li>
+            <li><a href="quiz.html">CSS Quiz</a></li>
+            <li><a href="quiz.html">JavaScript Quiz</a></li>
+            <li><a href="quiz.html">Python Quiz</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <h5>Explore</h5>
+          <ul class="footer-links">
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="tutors.html">Tutors</a></li>
+            <li><a href="bootcamps.html">Bootcamps</a></li>
+            <li><a href="membership.html">Membership</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <h5>Contact</h5>
+          <ul class="footer-links">
+            <li><a href="mailto:support@codify.com">support@codify.com</a></li>
+            <li><a href="tel:+44123456789">+44 123 456 789</a></li>
+            <li><span>Online Learning Platform</span></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="footer-line">
+      <p class="copyright">© 2026 Codify. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const quizBank = {
+      html: {
+        beginner: [
+          {
+            question: 'What does HTML stand for?',
+            options: ['Hyper Text Markup Language', 'High Text Machine Language', 'Hyper Transfer Markdown Language', 'Home Tool Markup Language'],
+            correct: 0,
+            explanation: 'HTML stands for Hyper Text Markup Language. It is used to structure content on webpages.'
+          },
+          {
+            question: 'Which HTML tag is used for the largest heading?',
+            options: ['<heading>', '<h1>', '<head>', '<h6>'],
+            correct: 1,
+            explanation: '<h1> is the largest heading tag and is usually used for the main page heading.'
+          },
+          {
+            question: 'Which tag is used to create a hyperlink?',
+            options: ['<link>', '<a>', '<href>', '<url>'],
+            correct: 1,
+            explanation: 'The <a> tag creates hyperlinks. The destination is usually added with the href attribute.'
+          },
+          {
+            question: 'Which attribute is important for image accessibility?',
+            options: ['title', 'src', 'alt', 'width'],
+            correct: 2,
+            explanation: 'The alt attribute provides alternative text for images, helping accessibility and screen readers.'
+          },
+          {
+            question: 'Which tag is used for an unordered list?',
+            options: ['<ol>', '<ul>', '<li>', '<list>'],
+            correct: 1,
+            explanation: '<ul> is used for unordered lists. Each list item inside it uses <li>.'
+          }
+        ],
+        intermediate: [
+          {
+            question: 'Which semantic tag is best for the main unique content of a page?',
+            options: ['<section>', '<main>', '<article>', '<div>'],
+            correct: 1,
+            explanation: '<main> represents the dominant content of the document and should usually appear once.'
+          },
+          {
+            question: 'What is the purpose of the label element in forms?',
+            options: ['To style inputs', 'To validate forms', 'To describe form controls accessibly', 'To submit data'],
+            correct: 2,
+            explanation: 'The label element connects text to form controls, making forms easier to understand and use.'
+          },
+          {
+            question: 'Which input type is best for email addresses?',
+            options: ['text', 'mail', 'email', 'contact'],
+            correct: 2,
+            explanation: 'type="email" provides better semantics and browser validation support.'
+          },
+          {
+            question: 'What does the novalidate attribute do on a form?',
+            options: ['Adds extra validation', 'Disables browser validation', 'Submits form twice', 'Makes form read-only'],
+            correct: 1,
+            explanation: 'novalidate disables built-in browser validation so custom validation can be used instead.'
+          },
+          {
+            question: 'Which tag is most suitable for site navigation links?',
+            options: ['<menu>', '<nav>', '<links>', '<header>'],
+            correct: 1,
+            explanation: '<nav> is a semantic element for a section containing major navigation links.'
+          }
+        ],
+        advanced: [
+          {
+            question: 'Why is heading hierarchy important?',
+            options: ['Only for colors', 'Only for spacing', 'For semantics, accessibility, and structure', 'To make links work'],
+            correct: 2,
+            explanation: 'A clear heading hierarchy improves page structure, accessibility, and readability for users and screen readers.'
+          },
+          {
+            question: 'What is the best reason to use semantic HTML?',
+            options: ['It replaces CSS', 'It improves meaning and accessibility', 'It speeds JavaScript', 'It removes the need for classes'],
+            correct: 1,
+            explanation: 'Semantic HTML gives content meaning, helping accessibility tools, search engines, and maintainability.'
+          },
+          {
+            question: 'Which is the strongest choice for a clickable button that performs an action on the page?',
+            options: ['<a>', '<button>', '<span>', '<div>'],
+            correct: 1,
+            explanation: '<button> is the proper semantic element for actions like toggles, modals, or form interactions.'
+          },
+          {
+            question: 'Why should decorative images often have empty alt text?',
+            options: ['To hide them from search engines', 'To reduce file size', 'So screen readers can skip non-informative images', 'To center them'],
+            correct: 2,
+            explanation: 'Empty alt text tells assistive technology to ignore decorative images that do not add meaning.'
+          },
+          {
+            question: 'What is a likely issue when many links use href="#"?',
+            options: ['Better SEO', 'Page jumps and poor UX', 'Faster loading', 'Automatic styling'],
+            correct: 1,
+            explanation: 'href="#" often causes the page to jump to the top and creates weak user experience if it is not a real destination.'
+          }
+        ]
+      },
+      css: {
+        beginner: [
+          {
+            question: 'Which property changes text color?',
+            options: ['font-color', 'text-color', 'color', 'foreground'],
+            correct: 2,
+            explanation: 'The color property changes the text color of an element.'
+          },
+          {
+            question: 'Which CSS property controls spacing inside an element?',
+            options: ['margin', 'padding', 'gap', 'border'],
+            correct: 1,
+            explanation: 'Padding controls inner spacing between content and the element border.'
+          },
+          {
+            question: 'Which layout system is best for one-dimensional alignment?',
+            options: ['Grid', 'Flexbox', 'Float', 'Position'],
+            correct: 1,
+            explanation: 'Flexbox is ideal for one-dimensional layouts such as rows or columns.'
+          },
+          {
+            question: 'Which property rounds element corners?',
+            options: ['corner-radius', 'border-curve', 'border-radius', 'round'],
+            correct: 2,
+            explanation: 'border-radius is used to round the corners of elements.'
+          },
+          {
+            question: 'Which property adds outer spacing around an element?',
+            options: ['padding', 'margin', 'gap', 'line-height'],
+            correct: 1,
+            explanation: 'Margin adds space outside the element.'
+          }
+        ],
+        intermediate: [
+          {
+            question: 'Which property is commonly used to center items horizontally in a flex container?',
+            options: ['align-items', 'justify-content', 'text-align', 'place-content'],
+            correct: 1,
+            explanation: 'justify-content controls horizontal distribution in a row-direction flex container.'
+          },
+          {
+            question: 'What does box-sizing: border-box do?',
+            options: ['Hides borders', 'Includes padding and border inside width/height', 'Removes spacing', 'Makes elements responsive'],
+            correct: 1,
+            explanation: 'border-box makes sizing easier by including padding and border in the element width and height.'
+          },
+          {
+            question: 'Which unit is relative to the root font size?',
+            options: ['em', 'px', 'rem', '%'],
+            correct: 2,
+            explanation: 'rem is relative to the root element font size, usually the html font size.'
+          },
+          {
+            question: 'Which property creates a smooth change on hover?',
+            options: ['animation', 'transform', 'transition', 'filter'],
+            correct: 2,
+            explanation: 'transition makes property changes smoother over time.'
+          },
+          {
+            question: 'Which property is best for arranging rows and columns together?',
+            options: ['flex', 'grid', 'float', 'display:inline'],
+            correct: 1,
+            explanation: 'CSS Grid is designed for two-dimensional layouts with rows and columns.'
+          }
+        ],
+        advanced: [
+          {
+            question: 'Why are custom properties useful in large projects?',
+            options: ['They replace HTML', 'They store reusable design values', 'They make JavaScript unnecessary', 'They reduce all CSS size automatically'],
+            correct: 1,
+            explanation: 'Custom properties make it easier to reuse colors, spacing, and theme values consistently.'
+          },
+          {
+            question: 'Which statement about z-index is true?',
+            options: ['It works without positioning context always', 'It controls stacking order', 'It changes opacity', 'It centers items'],
+            correct: 1,
+            explanation: 'z-index controls stacking order, usually when elements are positioned or create stacking contexts.'
+          },
+          {
+            question: 'What is a common reason for using clamp() in typography?',
+            options: ['To hide text', 'To create responsive font sizes', 'To align images', 'To animate shadows'],
+            correct: 1,
+            explanation: 'clamp() is often used for responsive sizes that stay within a minimum and maximum range.'
+          },
+          {
+            question: 'Why should hover-only interactions be used carefully?',
+            options: ['Because CSS forbids them', 'Because touch devices may not support hover the same way', 'Because they break HTML', 'Because they remove focus'],
+            correct: 1,
+            explanation: 'Touch devices may not provide traditional hover behavior, so interactions should remain accessible.'
+          },
+          {
+            question: 'What does backdrop-filter usually affect?',
+            options: ['The text itself', 'The content behind an element', 'The border only', 'The file size'],
+            correct: 1,
+            explanation: 'backdrop-filter applies visual effects like blur to the area behind an element.'
+          }
+        ]
+      },
+      javascript: {
+        beginner: [
+          {
+            question: 'Which keyword declares a block-scoped variable?',
+            options: ['var', 'let', 'const', 'Both let and const'],
+            correct: 3,
+            explanation: 'Both let and const are block-scoped. const cannot be reassigned after declaration.'
+          },
+          {
+            question: 'Which method is used to select an element by ID?',
+            options: ['querySelectorAll', 'getElementById', 'getElementsByClassName', 'selectById'],
+            correct: 1,
+            explanation: 'document.getElementById() selects a single element by its ID.'
+          },
+          {
+            question: 'Which event is best for reacting to text input changes?',
+            options: ['click', 'mouseover', 'input', 'submit'],
+            correct: 2,
+            explanation: 'The input event reacts to typing, pasting, and other input changes.'
+          },
+          {
+            question: 'What does addEventListener do?',
+            options: ['Styles an element', 'Adds a class', 'Attaches an event handler', 'Creates HTML'],
+            correct: 2,
+            explanation: 'addEventListener connects JavaScript code to browser events like click or input.'
+          },
+          {
+            question: 'Which data type represents true or false?',
+            options: ['String', 'Number', 'Boolean', 'Object'],
+            correct: 2,
+            explanation: 'Boolean values are true and false.'
+          }
+        ],
+        intermediate: [
+          {
+            question: 'Why is event delegation useful?',
+            options: ['It removes HTML', 'It handles events efficiently from a parent element', 'It increases CSS speed', 'It validates forms automatically'],
+            correct: 1,
+            explanation: 'Event delegation lets a parent handle events for dynamic child elements, reducing repeated listeners.'
+          },
+          {
+            question: 'What does JSON.parse do?',
+            options: ['Turns an object into a string', 'Converts JSON text into a JavaScript value', 'Stores data in cookies', 'Makes an API call'],
+            correct: 1,
+            explanation: 'JSON.parse converts a JSON string into a usable JavaScript object or value.'
+          },
+          {
+            question: 'Why is try...catch useful with localStorage data?',
+            options: ['It styles storage', 'It prevents crashes from invalid data', 'It encrypts storage', 'It removes cookies'],
+            correct: 1,
+            explanation: 'try...catch helps protect your app if stored JSON is broken or unexpected.'
+          },
+          {
+            question: 'Which method creates a new array based on filtered items?',
+            options: ['map', 'filter', 'reduce', 'push'],
+            correct: 1,
+            explanation: 'filter returns a new array containing only items that pass the condition.'
+          },
+          {
+            question: 'Which property is safer for inserting plain text than innerHTML?',
+            options: ['textContent', 'className', 'style', 'dataset'],
+            correct: 0,
+            explanation: 'textContent is safer for plain text because it does not parse HTML.'
+          }
+        ],
+        advanced: [
+          {
+            question: 'What is a common risk of using innerHTML with user input?',
+            options: ['Slow borders', 'XSS security issues', 'Broken CSS variables', 'Lost cookies'],
+            correct: 1,
+            explanation: 'Using innerHTML with unsanitized user input can allow malicious scripts or markup injection.'
+          },
+          {
+            question: 'Why might input be better than keyup for search fields?',
+            options: ['It is shorter', 'It also handles paste and other input methods', 'It works only on desktop', 'It is a CSS event'],
+            correct: 1,
+            explanation: 'The input event covers more real user actions, including paste and mobile input methods.'
+          },
+          {
+            question: 'What does preventDefault commonly do in form handling?',
+            options: ['Deletes the form', 'Stops the browser’s default action', 'Makes fields required', 'Refreshes the page'],
+            correct: 1,
+            explanation: 'preventDefault stops default browser behavior, such as a normal form submission.'
+          },
+          {
+            question: 'Which pattern helps keep large codebases easier to maintain?',
+            options: ['One giant function', 'Separate functions with clear responsibilities', 'All logic in HTML', 'No naming conventions'],
+            correct: 1,
+            explanation: 'Separating concerns into clear functions improves readability, debugging, and scaling.'
+          },
+          {
+            question: 'Why use dataset attributes on buttons?',
+            options: ['To create CSS gradients', 'To store custom data for interactions', 'To replace IDs everywhere', 'To validate forms'],
+            correct: 1,
+            explanation: 'dataset provides a clean way to attach small pieces of data to elements for scripts to use.'
+          }
+        ]
+      },
+      python: {
+        beginner: [
+          {
+            question: 'Which symbol is used for comments in Python?',
+            options: ['//', '#', '<!-- -->', '/* */'],
+            correct: 1,
+            explanation: 'Python uses # for single-line comments.'
+          },
+          {
+            question: 'Which function outputs text to the console?',
+            options: ['echo()', 'log()', 'print()', 'show()'],
+            correct: 2,
+            explanation: 'print() is used to display output in Python.'
+          },
+          {
+            question: 'Which data type stores whole numbers?',
+            options: ['float', 'str', 'int', 'bool'],
+            correct: 2,
+            explanation: 'int stores integer values such as 1, 20, or -5.'
+          },
+          {
+            question: 'Which keyword defines a function in Python?',
+            options: ['func', 'define', 'def', 'function'],
+            correct: 2,
+            explanation: 'Python uses def to define functions.'
+          },
+          {
+            question: 'Which collection uses square brackets?',
+            options: ['tuple', 'set', 'dictionary', 'list'],
+            correct: 3,
+            explanation: 'Lists use square brackets, for example [1, 2, 3].'
+          }
+        ],
+        intermediate: [
+          {
+            question: 'What does len() return?',
+            options: ['The type of a value', 'The length of a collection or string', 'A random number', 'A sorted list'],
+            correct: 1,
+            explanation: 'len() returns the number of items in a collection or characters in a string.'
+          },
+          {
+            question: 'Which statement is used for looping over items in a sequence?',
+            options: ['repeat', 'for', 'loop', 'while each'],
+            correct: 1,
+            explanation: 'A for loop is commonly used to iterate over strings, lists, ranges, and more.'
+          },
+          {
+            question: 'Which type stores key-value pairs?',
+            options: ['list', 'tuple', 'dict', 'set'],
+            correct: 2,
+            explanation: 'A dictionary stores data in key-value pairs.'
+          },
+          {
+            question: 'What does input() return by default?',
+            options: ['int', 'float', 'str', 'bool'],
+            correct: 2,
+            explanation: 'input() returns user input as a string unless converted.'
+          },
+          {
+            question: 'Which keyword is used to handle exceptions?',
+            options: ['check', 'error', 'try', 'handle'],
+            correct: 2,
+            explanation: 'try is used with except to handle errors gracefully.'
+          }
+        ],
+        advanced: [
+          {
+            question: 'Why are functions useful in Python?',
+            options: ['They remove loops', 'They organize reusable logic', 'They replace variables', 'They speed all code automatically'],
+            correct: 1,
+            explanation: 'Functions help group reusable logic, improving readability and maintainability.'
+          },
+          {
+            question: 'What is a common reason to use list comprehensions?',
+            options: ['To style output', 'To create lists concisely', 'To open files', 'To catch errors'],
+            correct: 1,
+            explanation: 'List comprehensions provide a concise way to build lists from existing iterables.'
+          },
+          {
+            question: 'What does None represent in Python?',
+            options: ['Zero', 'False only', 'No value / null-like state', 'An empty string'],
+            correct: 2,
+            explanation: 'None represents the absence of a value.'
+          },
+          {
+            question: 'Why is indentation important in Python?',
+            options: ['Only for decoration', 'It defines code blocks', 'It changes variable names', 'It makes comments run'],
+            correct: 1,
+            explanation: 'Python uses indentation to define blocks such as loops, functions, and conditionals.'
+          },
+          {
+            question: 'Which concept helps prevent repeated code in larger programs?',
+            options: ['Magic numbers', 'Global variables everywhere', 'Reusable functions and modules', 'Removing comments'],
+            correct: 2,
+            explanation: 'Reusable functions and modules help structure larger Python programs cleanly.'
+          }
+        ]
+      },
+      c: {
+        beginner: [
+          {
+            question: 'Which function is commonly used for output in C?',
+            options: ['print()', 'cout', 'printf()', 'echo()'],
+            correct: 2,
+            explanation: 'printf() is commonly used for output in C.'
+          },
+          {
+            question: 'Which symbol ends most statements in C?',
+            options: [':', ',', ';', '.'],
+            correct: 2,
+            explanation: 'A semicolon ends most statements in C.'
+          },
+          {
+            question: 'Which header is commonly included for printf?',
+            options: ['<math.h>', '<string.h>', '<stdio.h>', '<main.h>'],
+            correct: 2,
+            explanation: '<stdio.h> contains declarations for standard input and output functions like printf().' 
+          },
+          {
+            question: 'Which data type is commonly used for whole numbers?',
+            options: ['char', 'float', 'int', 'double'],
+            correct: 2,
+            explanation: 'int stores integer values in C.'
+          },
+          {
+            question: 'Which keyword is used for conditional branching?',
+            options: ['when', 'if', 'check', 'caseif'],
+            correct: 1,
+            explanation: 'if is used to run code conditionally.'
+          }
+        ],
+        intermediate: [
+          {
+            question: 'What is a pointer in C?',
+            options: ['A loop', 'A variable storing a memory address', 'A string type', 'A math operator'],
+            correct: 1,
+            explanation: 'A pointer stores the memory address of another variable.'
+          },
+          {
+            question: 'Which operator is used to access the value at a pointer address?',
+            options: ['&', '*', '#', '%'],
+            correct: 1,
+            explanation: 'The * operator is used for dereferencing a pointer.'
+          },
+          {
+            question: 'What does &variable usually give in C?',
+            options: ['The variable type', 'The variable address', 'The variable size', 'The variable name'],
+            correct: 1,
+            explanation: 'The & operator returns the memory address of a variable.'
+          },
+          {
+            question: 'Which structure repeats a block while a condition is true?',
+            options: ['for', 'if', 'switch', 'typedef'],
+            correct: 0,
+            explanation: 'A for loop can repeat code while a condition remains true; so can while loops.'
+          },
+          {
+            question: 'Why are functions useful in C?',
+            options: ['They create CSS', 'They organize reusable code', 'They remove semicolons', 'They replace headers'],
+            correct: 1,
+            explanation: 'Functions organize logic into reusable, easier-to-maintain pieces.'
+          }
+        ],
+        advanced: [
+          {
+            question: 'What is a common risk of incorrect pointer use?',
+            options: ['Better responsiveness', 'Memory errors and crashes', 'Automatic optimization', 'Safer code'],
+            correct: 1,
+            explanation: 'Incorrect pointer use can lead to invalid memory access, crashes, and bugs.'
+          },
+          {
+            question: 'Why is clear memory handling important in C?',
+            options: ['Because C manages everything automatically', 'Because developers often control memory directly', 'Because C has no variables', 'Because loops need it'],
+            correct: 1,
+            explanation: 'C often gives direct control over memory, so careful handling is essential.'
+          },
+          {
+            question: 'What is the main idea of procedural programming?',
+            options: ['Only using objects', 'Organizing logic into procedures/functions', 'Avoiding variables', 'Removing conditions'],
+            correct: 1,
+            explanation: 'Procedural programming organizes a program around procedures or functions.'
+          },
+          {
+            question: 'Why are header files useful?',
+            options: ['They store images', 'They declare interfaces and reusable definitions', 'They replace source files', 'They create loops'],
+            correct: 1,
+            explanation: 'Header files help share declarations and interfaces across multiple source files.'
+          },
+          {
+            question: 'What improves maintainability in C projects?',
+            options: ['Putting everything in main', 'Breaking code into clear modules and functions', 'Using only global variables', 'Avoiding comments and naming'],
+            correct: 1,
+            explanation: 'Clear modules, functions, and naming make C projects easier to manage and debug.'
+          }
+        ]
+      },
+      cpp: {
+        beginner: [
+          {
+            question: 'Which stream is commonly used for output in C++?',
+            options: ['print', 'cout', 'echo', 'write'],
+            correct: 1,
+            explanation: 'cout is commonly used with << for output in C++.'
+          },
+          {
+            question: 'Which header is commonly used for cout?',
+            options: ['<iostream>', '<stdio.h>', '<output>', '<stream.h>'],
+            correct: 0,
+            explanation: '<iostream> provides input and output stream objects like cout.'
+          },
+          {
+            question: 'Which keyword creates a class in C++?',
+            options: ['object', 'class', 'structonly', 'defineclass'],
+            correct: 1,
+            explanation: 'The class keyword defines a class in C++.'
+          },
+          {
+            question: 'Which concept groups data and behavior together?',
+            options: ['Looping', 'Conditionals', 'Object-oriented programming', 'Comments'],
+            correct: 2,
+            explanation: 'OOP groups related data and functions together in classes and objects.'
+          },
+          {
+            question: 'Which symbol is often used with cout to insert output?',
+            options: ['>>', '<<', '==', '&&'],
+            correct: 1,
+            explanation: 'cout uses the insertion operator << to output values.'
+          }
+        ],
+        intermediate: [
+          {
+            question: 'What is a constructor?',
+            options: ['A loop', 'A function used to initialize objects', 'A variable', 'A header file'],
+            correct: 1,
+            explanation: 'A constructor initializes objects when they are created.'
+          },
+          {
+            question: 'What does STL stand for in C++?',
+            options: ['Standard Template Library', 'System Type Logic', 'Structured Tool Language', 'Static Template List'],
+            correct: 0,
+            explanation: 'STL stands for Standard Template Library and includes containers, algorithms, and iterators.'
+          },
+          {
+            question: 'Which STL container stores elements in dynamic sequence form?',
+            options: ['vector', 'cout', 'class', 'namespace'],
+            correct: 0,
+            explanation: 'vector is a common dynamic array container in C++.'
+          },
+          {
+            question: 'Why is encapsulation useful?',
+            options: ['It removes all methods', 'It hides implementation details and protects data', 'It avoids classes', 'It replaces variables'],
+            correct: 1,
+            explanation: 'Encapsulation helps control access and hide internal implementation details.'
+          },
+          {
+            question: 'What does inheritance allow?',
+            options: ['A class to reuse and extend another class', 'A loop to repeat', 'A pointer to print', 'A vector to sort itself'],
+            correct: 0,
+            explanation: 'Inheritance lets one class build on another, enabling reuse and extension.'
+          }
+        ],
+        advanced: [
+          {
+            question: 'Why are templates powerful in C++?',
+            options: ['They style UI', 'They allow generic programming', 'They replace classes', 'They remove functions'],
+            correct: 1,
+            explanation: 'Templates let you write reusable generic code for multiple types.'
+          },
+          {
+            question: 'What is a benefit of using STL algorithms?',
+            options: ['They always remove bugs', 'They provide reusable and tested operations', 'They replace variables', 'They make comments unnecessary'],
+            correct: 1,
+            explanation: 'STL algorithms help write clearer, reusable logic using well-known operations.'
+          },
+          {
+            question: 'Why is RAII important in C++?',
+            options: ['It links HTML files', 'It ties resource management to object lifetime', 'It replaces loops', 'It removes constructors'],
+            correct: 1,
+            explanation: 'RAII helps manage resources safely by tying acquisition and cleanup to object lifetime.'
+          },
+          {
+            question: 'What improves large C++ project quality?',
+            options: ['One huge file', 'Clear class design and modular structure', 'Only global objects', 'No naming conventions'],
+            correct: 1,
+            explanation: 'Clear class design, modules, and maintainable structure help scale C++ codebases.'
+          },
+          {
+            question: 'What is polymorphism mainly about?',
+            options: ['Using many comments', 'Different objects responding through a shared interface', 'Sorting vectors', 'Replacing constructors'],
+            correct: 1,
+            explanation: 'Polymorphism allows different objects to be used through a common interface.'
+          }
+        ]
+      }
+    };
+
+    let selectedTopic = 'html';
+    let selectedLevel = 'beginner';
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let selectedAnswer = null;
+    let wrongAnswers = [];
+    let quizStarted = false;
+
+    const topicGrid = document.getElementById('topicGrid');
+    const difficultyGrid = document.getElementById('difficultyGrid');
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    const resetQuizBtn = document.getElementById('resetQuizBtn');
+    const questionCount = document.getElementById('questionCount');
+    const quizTopicInfo = document.getElementById('quizTopicInfo');
+    const quizProgressBar = document.getElementById('quizProgressBar');
+    const questionText = document.getElementById('questionText');
+    const answersWrap = document.getElementById('answersWrap');
+    const feedbackBox = document.getElementById('feedbackBox');
+    const feedbackTitle = document.getElementById('feedbackTitle');
+    const feedbackText = document.getElementById('feedbackText');
+    const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+    const finishQuizBtn = document.getElementById('finishQuizBtn');
+    const metaTopic = document.getElementById('metaTopic');
+    const metaLevel = document.getElementById('metaLevel');
+    const metaScore = document.getElementById('metaScore');
+    const metaRemaining = document.getElementById('metaRemaining');
+    const resultCard = document.getElementById('resultCard');
+    const reviewCard = document.getElementById('reviewCard');
+    const emptyReviewCard = document.getElementById('emptyReviewCard');
+    const finalScoreText = document.getElementById('finalScoreText');
+    const resultSummary = document.getElementById('resultSummary');
+    const resultTopicChip = document.getElementById('resultTopicChip');
+    const resultLevelChip = document.getElementById('resultLevelChip');
+    const resultPercentChip = document.getElementById('resultPercentChip');
+    const recommendationText = document.getElementById('recommendationText');
+    const retryQuizBtn = document.getElementById('retryQuizBtn');
+    const reviewAnswersBtn = document.getElementById('reviewAnswersBtn');
+    const reviewList = document.getElementById('reviewList');
+
+    function prettyTopic(topic) {
+      const map = {
+        html: 'HTML',
+        css: 'CSS',
+        javascript: 'JavaScript',
+        python: 'Python',
+        c: 'C',
+        cpp: 'C++'
+      };
+      return map[topic] || topic;
+    }
+
+    function prettyLevel(level) {
+      return level.charAt(0).toUpperCase() + level.slice(1);
+    }
+
+    function setCookie(name, value, days) {
+      const expiresAt = new Date();
+      expiresAt.setTime(expiresAt.getTime() + (days * 24 * 60 * 60 * 1000));
+      document.cookie = `${name}=${encodeURIComponent(value)};expires=${expiresAt.toUTCString()};path=/`;
+    }
+
+    function getCookie(name) {
+      const cookieName = `${name}=`;
+      const cookies = decodeURIComponent(document.cookie).split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.indexOf(cookieName) === 0) {
+          return cookie.substring(cookieName.length);
+        }
+      }
+      return '';
+    }
+
+    function saveQuizPreference() {
+      localStorage.setItem('quizTopic', selectedTopic);
+      localStorage.setItem('quizLevel', selectedLevel);
+      setCookie('quizTopic', selectedTopic, 7);
+      setCookie('quizLevel', selectedLevel, 7);
+    }
+
+    function loadQuizPreference() {
+      const savedTopic = localStorage.getItem('quizTopic') || getCookie('quizTopic');
+      const savedLevel = localStorage.getItem('quizLevel') || getCookie('quizLevel');
+      if (savedTopic && quizBank[savedTopic]) selectedTopic = savedTopic;
+      if (savedLevel && quizBank[selectedTopic][savedLevel]) selectedLevel = savedLevel;
+      syncSelectionUI();
+      updateMeta();
+    }
+
+    function syncSelectionUI() {
+      document.querySelectorAll('.topic-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.topic === selectedTopic);
+      });
+      document.querySelectorAll('.difficulty-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.level === selectedLevel);
+      });
+    }
+
+    function updateMeta() {
+      metaTopic.textContent = prettyTopic(selectedTopic);
+      metaLevel.textContent = prettyLevel(selectedLevel);
+      metaScore.textContent = score;
+      metaRemaining.textContent = currentQuestions.length ? currentQuestions.length - currentIndex : 5;
+      quizTopicInfo.textContent = `${prettyTopic(selectedTopic)} • ${prettyLevel(selectedLevel)}`;
+    }
+
+    function startQuiz() {
+      currentQuestions = quizBank[selectedTopic][selectedLevel];
+      currentIndex = 0;
+      score = 0;
+      selectedAnswer = null;
+      wrongAnswers = [];
+      quizStarted = true;
+      resultCard.style.display = 'none';
+      reviewCard.style.display = 'none';
+      emptyReviewCard.style.display = 'none';
+      saveQuizPreference();
+      renderQuestion();
+      updateMeta();
+
+      const quizCard = document.getElementById('quizCard');
+      if (quizCard) {
+        quizCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => {
+          questionText.setAttribute('tabindex', '-1');
+          questionText.focus();
+        }, 450);
+      }
+    }
+
+    function renderQuestion() {
+      const current = currentQuestions[currentIndex];
+      questionCount.textContent = `Question ${currentIndex + 1} of ${currentQuestions.length}`;
+      quizProgressBar.style.width = `${((currentIndex + 1) / currentQuestions.length) * 100}%`;
+      questionText.textContent = current.question;
+      answersWrap.innerHTML = '';
+      feedbackBox.style.display = 'none';
+      feedbackBox.className = 'feedback-box';
+      nextQuestionBtn.disabled = true;
+      finishQuizBtn.disabled = true;
+      selectedAnswer = null;
+
+      current.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer-btn';
+        btn.type = 'button';
+        btn.textContent = option;
+        btn.addEventListener('click', () => selectAnswer(index));
+        answersWrap.appendChild(btn);
+      });
+
+      metaRemaining.textContent = currentQuestions.length - currentIndex;
+      metaScore.textContent = score;
+    }
+
+    function selectAnswer(index) {
+      if (selectedAnswer !== null) return;
+      selectedAnswer = index;
+      const current = currentQuestions[currentIndex];
+      const answerButtons = document.querySelectorAll('.answer-btn');
+      const isCorrect = index === current.correct;
+
+      answerButtons.forEach((btn, i) => {
+        btn.classList.add('locked');
+        if (i === current.correct) btn.classList.add('correct');
+        if (i === index && i !== current.correct) btn.classList.add('wrong');
+      });
+
+      if (isCorrect) {
+        score += 1;
+        feedbackBox.classList.add('success');
+        feedbackTitle.textContent = 'Correct answer';
+        feedbackText.textContent = current.explanation;
+      } else {
+        wrongAnswers.push({
+          question: current.question,
+          yourAnswer: current.options[index],
+          correctAnswer: current.options[current.correct],
+          explanation: current.explanation
+        });
+        feedbackBox.classList.add('error');
+        feedbackTitle.textContent = 'Not quite';
+        feedbackText.textContent = current.explanation;
+      }
+
+      feedbackBox.style.display = 'block';
+      metaScore.textContent = score;
+
+      if (currentIndex < currentQuestions.length - 1) {
+        nextQuestionBtn.disabled = false;
+      } else {
+        finishQuizBtn.disabled = false;
+      }
+    }
+
+    function nextQuestion() {
+      currentIndex += 1;
+      renderQuestion();
+    }
+
+    function finishQuiz() {
+      const total = currentQuestions.length;
+      const percent = Math.round((score / total) * 100);
+      finalScoreText.textContent = `${score} / ${total}`;
+      resultSummary.textContent = percent >= 80
+        ? 'Strong work. You handled this quiz really well.'
+        : percent >= 50
+          ? 'Good progress. You understand the basics but still have room to improve.'
+          : 'This is a good starting point. Review the explanations and try again.';
+
+      resultTopicChip.textContent = prettyTopic(selectedTopic);
+      resultLevelChip.textContent = prettyLevel(selectedLevel);
+      resultPercentChip.textContent = `${percent}%`;
+
+      if (percent >= 80) {
+        recommendationText.textContent = `Try ${prettyLevel(selectedLevel) === 'Advanced' ? 'another topic at advanced level' : 'the next difficulty level in ' + prettyTopic(selectedTopic)} to keep improving.`;
+      } else if (percent >= 50) {
+        recommendationText.textContent = `Retry ${prettyTopic(selectedTopic)} at ${prettyLevel(selectedLevel).toLowerCase()} level and focus on the explanation after each answer.`;
+      } else {
+        recommendationText.textContent = `Review the wrong answers and repeat ${prettyTopic(selectedTopic)} at ${prettyLevel(selectedLevel).toLowerCase()} level before moving on.`;
+      }
+
+      resultCard.style.display = 'block';
+      reviewCard.style.display = 'none';
+      emptyReviewCard.style.display = 'none';
+      resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function reviewWrongAnswers() {
+      reviewList.innerHTML = '';
+      if (!wrongAnswers.length) {
+        reviewCard.style.display = 'none';
+        emptyReviewCard.style.display = 'block';
+        emptyReviewCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+
+      wrongAnswers.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'meta-box';
+        card.innerHTML = `
+          <h5>${item.question}</h5>
+          <p class="review-text"><strong>Your answer:</strong> ${item.yourAnswer}</p>
+          <p class="review-text"><strong>Correct answer:</strong> ${item.correctAnswer}</p>
+          <p class="review-text mb-0"><strong>Why:</strong> ${item.explanation}</p>
+        `;
+        reviewList.appendChild(card);
+      });
+
+      emptyReviewCard.style.display = 'none';
+      reviewCard.style.display = 'block';
+      reviewCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function resetQuizState() {
+      currentQuestions = [];
+      currentIndex = 0;
+      score = 0;
+      selectedAnswer = null;
+      wrongAnswers = [];
+      quizStarted = false;
+      questionText.textContent = 'Press start to begin your quiz.';
+      answersWrap.innerHTML = '';
+      feedbackBox.style.display = 'none';
+      nextQuestionBtn.disabled = true;
+      finishQuizBtn.disabled = true;
+      questionCount.textContent = 'Question 1 of 5';
+      quizProgressBar.style.width = '20%';
+      resultCard.style.display = 'none';
+      reviewCard.style.display = 'none';
+      emptyReviewCard.style.display = 'none';
+      updateMeta();
+    }
+
+    topicGrid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.topic-btn');
+      if (!btn) return;
+      selectedTopic = btn.dataset.topic;
+      syncSelectionUI();
+      updateMeta();
+      saveQuizPreference();
+    });
+
+    difficultyGrid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.difficulty-btn');
+      if (!btn) return;
+      selectedLevel = btn.dataset.level;
+      syncSelectionUI();
+      updateMeta();
+      saveQuizPreference();
+    });
+
+    startQuizBtn.addEventListener('click', startQuiz);
+    resetQuizBtn.addEventListener('click', resetQuizState);
+    nextQuestionBtn.addEventListener('click', nextQuestion);
+    finishQuizBtn.addEventListener('click', finishQuiz);
+    retryQuizBtn.addEventListener('click', startQuiz);
+    reviewAnswersBtn.addEventListener('click', reviewWrongAnswers);
+
+    loadQuizPreference();
+    resetQuizState();
+  </script>
+</body>
+</html>

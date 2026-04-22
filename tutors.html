@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codify | Tutors</title>
+  <meta name="description" content="Explore Codify tutors, book coding sessions, and join workshops in a modern programmer-style learning platform." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08111f;
+      --bg-2: #0d1728;
+      --panel: rgba(16, 24, 40, 0.92);
+      --panel-2: rgba(22, 32, 52, 0.96);
+      --line: rgba(255,255,255,0.08);
+      --text: #ecf3ff;
+      --muted: #aebdd8;
+      --accent: #5aa2ff;
+      --accent-2: #7b61ff;
+      --success: #1fbd72;
+      --warning: #ffc857;
+      --shadow: 0 18px 44px rgba(0,0,0,0.28);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(90,162,255,0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(123,97,255,0.12), transparent 26%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      line-height: 1.6;
+    }
+
+    .custom-navbar {
+      background: rgba(8, 14, 24, 0.84);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 118px;
+      height: 78px;
+      border-radius: 12px;
+      object-fit: contain;
+      object-position: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.08);
+      background: rgba(11, 18, 32, 0.92);
+      padding: 5px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: none;
+    }
+
+    .navbar .nav-link {
+      color: var(--muted);
+      font-weight: 600;
+      transition: color .25s ease;
+    }
+
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active {
+      color: white;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 0.2rem rgba(90,162,255,0.18);
+    }
+
+    .section-space { padding: 72px 0; }
+    .bg-soft { background: rgba(255,255,255,0.025); }
+
+    .section-title { margin-bottom: 28px; }
+    .section-title h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 740px;
+    }
+
+    .section-note {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background: rgba(90,162,255,0.08);
+      border: 1px solid rgba(90,162,255,0.16);
+      color: #cfe1ff;
+    }
+
+    .tutor-hero {
+      position: relative;
+      padding: 90px 0 70px;
+      overflow: hidden;
+    }
+
+    .code-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(90,162,255,0.12), transparent 20%),
+        radial-gradient(circle at 82% 14%, rgba(123,97,255,0.14), transparent 22%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge,
+    .subject-badge,
+    .class-badge,
+    .mode-badge,
+    .feature-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-badge {
+      margin-bottom: 16px;
+      background: rgba(90,162,255,0.12);
+      color: #a9ceff;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 3.7rem);
+      line-height: 1.05;
+      font-weight: 700;
+      max-width: 720px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title .accent { color: #ffd257; }
+
+    .hero-desc {
+      max-width: 660px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .custom-btn-primary,
+    .custom-btn-secondary,
+    .card-action-btn,
+    .option-link {
+      border-radius: 12px;
+      font-weight: 700;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .custom-btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border: none;
+      box-shadow: 0 12px 28px rgba(90,162,255,0.24);
+      color: #fff;
+    }
+
+    .custom-btn-primary:hover,
+    .custom-btn-secondary:hover,
+    .card-action-btn:hover,
+    .option-link:hover {
+      transform: translateY(-2px);
+      color: #fff;
+    }
+
+    .custom-btn-secondary {
+      border: 1px solid rgba(255,255,255,0.18);
+      color: white;
+    }
+
+    .hero-panel,
+    .feature-card,
+    .benefit-card,
+    .filter-box,
+    .tutor-card,
+    .workshop-card,
+    .booking-card,
+    .saved-card,
+    .mini-info-box,
+    .stat-card {
+      background: linear-gradient(180deg, rgba(18, 27, 44, 0.96), rgba(12, 18, 30, 0.98));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      padding: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-panel img {
+      width: 100%;
+      min-height: 360px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 18px;
+      display: block;
+      background: #0b1220;
+    }
+
+    .hero-stats { margin-top: 26px; }
+
+    .stat-card {
+      padding: 18px;
+      height: 100%;
+      border-radius: 18px;
+    }
+
+    .stat-card h3 {
+      margin-bottom: 4px;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .stat-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .mini-info-box,
+    .filter-box,
+    .feature-card,
+    .benefit-card,
+    .tutor-card,
+    .workshop-card,
+    .booking-card,
+    .saved-card {
+      padding: 24px;
+    }
+
+    .mini-info-box {
+      min-height: 100%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+    }
+
+    .feature-card,
+    .benefit-card,
+    .tutor-card,
+    .workshop-card {
+      height: 100%;
+      transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover,
+    .benefit-card:hover,
+    .tutor-card:hover,
+    .workshop-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(90,162,255,0.3);
+      box-shadow: 0 22px 44px rgba(0,0,0,0.32);
+    }
+
+    .tutor-card::before,
+    .workshop-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(90,162,255,0.08), transparent);
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+
+    .tutor-card:hover::before,
+    .workshop-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-card p,
+    .benefit-card p,
+    .tutor-card p,
+    .workshop-card p,
+    .saved-card p,
+    .faq-answer,
+    .option-text {
+      color: var(--muted);
+    }
+
+    .feature-card ul {
+      padding-left: 18px;
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .free-tag,
+    .class-badge.free { background: rgba(31,189,114,0.12); color: #8ce1b5; }
+    .paid-tag,
+    .class-badge.paid { background: rgba(255,200,87,0.13); color: #ffd77d; }
+    .workshop-tag,
+    .subject-badge { background: rgba(90,162,255,0.13); color: #add1ff; }
+    .bootcamp-tag { background: rgba(123,97,255,0.14); color: #cabdff; }
+    .mode-badge { background: rgba(255,255,255,0.06); color: var(--text); }
+
+    .tutor-badge-row,
+    .workshop-badge-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .option-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      text-decoration: none;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .option-link:hover {
+      border-color: rgba(90,162,255,0.35);
+      background: rgba(90,162,255,0.08);
+    }
+
+    .form-label { font-weight: 600; }
+
+    .form-control,
+    .form-select {
+      background: #0b1423;
+      border: 1px solid var(--line);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .form-control::placeholder { color: #8ea2c7; }
+
+    .form-control:focus,
+    .form-select:focus {
+      background: #0b1423;
+      color: var(--text);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(90,162,255,0.12);
+    }
+
+    .error {
+      display: block;
+      min-height: 18px;
+      margin-top: 6px;
+      color: #ff7d8d;
+      font-size: 0.9rem;
+    }
+
+    .is-invalid-custom {
+      border-color: #ff6577 !important;
+      box-shadow: 0 0 0 4px rgba(255,101,119,0.12) !important;
+    }
+
+    .is-valid-custom {
+      border-color: #1fbd72 !important;
+      box-shadow: 0 0 0 4px rgba(31,189,114,0.12) !important;
+    }
+
+    .success-box {
+      background: rgba(31,189,114,0.10);
+      border-left: 4px solid var(--success);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .faq-item {
+      border-top: 1px solid var(--line);
+      padding: 14px 0;
+    }
+
+    .faq-item:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      color: var(--text);
+      font-weight: 700;
+      padding: 0;
+    }
+
+    .faq-answer { display: none; padding-top: 10px; }
+
+    .site-footer {
+      background: rgba(5, 9, 15, 0.95);
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 50px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .footer-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      background: #0b1220;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a, .footer-text, .copyright, .footer-links span { color: var(--muted); }
+    .footer-links a:hover { color: white; }
+    .footer-line { border-color: var(--line); margin: 28px 0 16px; }
+
+    @media (max-width: 991px) {
+      .hero-panel img { min-height: 280px; }
+    }
+
+    @media (max-width: 768px) {
+      .tutor-hero { padding: 72px 0 52px; }
+      .section-space { padding: 56px 0; }
+      .hero-title { font-size: 2rem; }
+      .hero-panel,
+      .mini-info-box,
+      .filter-box,
+      .feature-card,
+      .benefit-card,
+      .tutor-card,
+      .workshop-card,
+      .booking-card,
+      .saved-card { padding: 20px; }
+      .brand-text { font-size: 1.4rem; }
+      .brand-logo { width: 96px; height: 64px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+  <div class="container">
+    <a class="navbar-brand brand-wrap" href="index.html">
+      <img src="images/codifylogo.jpeg" alt="Codify logo" class="brand-logo">
+      <span class="brand-text">Codify</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+        <li class="nav-item"><a class="nav-link" href="bootcamps.html">Bootcamps</a></li>
+        <li class="nav-item"><a class="nav-link" href="tutors.html">Tutors</a></li>
+        <li class="nav-item"><a class="nav-link" href="quiz.html">Quiz</a></li>
+        <li class="nav-item"><a class="nav-link" href="membership.html">Membership</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>s
+
+  <main>
+    <section class="tutor-hero">
+      <div class="code-glow"></div>
+      <div class="container hero-content">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <span class="hero-badge">Developer Tutors • Live Workshops • Smart Learning</span>
+            <h1 class="hero-title">Find the right <span class="accent">coding tutor</span> and level up your skills faster.</h1>
+            <p class="hero-desc">Book focused 1-to-1 sessions, join practical workshops, and learn with a clean programmer-first experience built for HTML, CSS, JavaScript, Python, C and C++.</p>
+            <div class="hero-buttons">
+              <a href="#bookingSection" class="btn btn-lg custom-btn-primary">Book a Tutor</a>
+              <a href="#learningOptions" class="btn btn-lg custom-btn-secondary">Explore Options</a>
+            </div>
+
+            <div class="hero-stats row g-3">
+              <div class="col-6 col-md-4">
+                <div class="stat-card">
+                  <h3>25+</h3>
+                  <p>Expert Tutors</p>
+                </div>
+              </div>
+              <div class="col-6 col-md-4">
+                <div class="stat-card">
+                  <h3>12+</h3>
+                  <p>Live Workshops</p>
+                </div>
+              </div>
+              <div class="col-6 col-md-4">
+                <div class="stat-card">
+                  <h3>6</h3>
+                  <p>Main Languages</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="hero-panel">
+              <img src="images/teacher teaching.jpg" alt="Tutor teaching programming">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-4">
+      <div class="container">
+        <div class="row g-3 text-center">
+          <div class="col-md-3"><div class="mini-info-box"><strong id="liveDateTime">Loading date and time...</strong></div></div>
+          <div class="col-md-3"><div class="mini-info-box">Free Trial Classes</div></div>
+          <div class="col-md-3"><div class="mini-info-box">1-to-1 Paid Sessions</div></div>
+          <div class="col-md-3"><div class="mini-info-box">Live Bootcamps & Workshops</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space" id="learningOptions">
+      <div class="container">
+        <div class="section-title text-center">
+          <h2>Choose your learning format</h2>
+          <p>Keep the experience simple: start free, go deeper with private tutoring, or join structured workshops and bootcamps.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card">
+              <div class="feature-tag free-tag">Free</div>
+              <h4>Free Tutor Classes</h4>
+              <p>Quick beginner-friendly sessions to help users understand coding basics before committing to advanced learning.</p>
+              <ul>
+                <li>Intro sessions</li>
+                <li>Basic coding concepts</li>
+                <li>Beginner support</li>
+              </ul>
+              <a href="#tutorDirectory" class="option-link learning-link" data-target="free">Open Free Classes</a>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card">
+              <div class="feature-tag paid-tag">Paid</div>
+              <h4>Private Classes</h4>
+              <p>Focused 1-to-1 sessions for assignments, projects, revision, interview prep, and deeper technical growth.</p>
+              <ul>
+                <li>Personal guidance</li>
+                <li>Flexible timing</li>
+                <li>Project mentoring</li>
+              </ul>
+              <a href="#tutorDirectory" class="option-link learning-link" data-target="paid">Open Private Classes</a>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card">
+              <div class="feature-tag workshop-tag">Live</div>
+              <h4>Workshops</h4>
+              <p>Short practical sessions around focused topics like Flexbox, DOM, Python basics, pointers, and OOP.</p>
+              <ul>
+                <li>Topic-focused</li>
+                <li>Hands-on activities</li>
+                <li>Live Q&amp;A</li>
+              </ul>
+              <a href="#eventsSection" class="option-link learning-link" data-target="workshop">Open Workshops</a>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card">
+              <div class="feature-tag bootcamp-tag">Bootcamp</div>
+              <h4>Bootcamps</h4>
+              <p>Structured learning with roadmap, tasks, tutor feedback, and stronger momentum for skill building.</p>
+              <ul>
+                <li>Weekly roadmap</li>
+                <li>Practical tasks</li>
+                <li>Guided growth</li>
+              </ul>
+              <a href="#eventsSection" class="option-link learning-link" data-target="bootcamp">Open Bootcamps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space bg-soft" id="tutorDirectory">
+      <div class="container">
+        <div class="section-title">
+          <h2>Find the right tutor</h2>
+          <p>Search by subject, filter by class type, and pick the tutor that matches your learning style.</p>
+          <div class="section-note" id="tutorSectionNote">Choose Free or Private Classes above to jump here with the right tutor filter already selected.</div>
+        </div>
+
+        <div class="filter-box mb-4">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="subjectFilter" class="form-label">Filter by Subject</label>
+              <select id="subjectFilter" class="form-select">
+                <option value="all">All Subjects</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="c">C</option>
+                <option value="cpp">C++</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="classTypeFilter" class="form-label">Class Type</label>
+              <select id="classTypeFilter" class="form-select">
+                <option value="all">All Types</option>
+                <option value="free">Free</option>
+                <option value="paid">Paid</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="tutorSearch" class="form-label">Search Tutor</label>
+              <input type="text" id="tutorSearch" class="form-control" placeholder="Search by name or subject">
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4" id="tutorContainer"></div>
+      </div>
+    </section>
+
+    <section class="section-space" id="eventsSection">
+      <div class="container">
+        <div class="section-title">
+          <h2>Workshops & Bootcamps</h2>
+          <p>Join practical live events and guided programs designed for learners who want hands-on momentum.</p>
+          <div class="section-note" id="eventSectionNote">Choose Workshops or Bootcamps above to jump here and open matching event options.</div>
+        </div>
+        <div class="row g-4" id="workshopContainer"></div>
+      </div>
+    </section>
+
+    <section class="section-space bg-soft">
+      <div class="container">
+        <div class="section-title text-center">
+          <h2>Why choose Codify tutors?</h2>
+          <p>Built to feel more like a clean developer platform than a generic course page.</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3"><div class="benefit-card"><h5>Fast Learning Path</h5><p>Start with free basics, move to paid sessions, and grow into structured technical programs.</p></div></div>
+          <div class="col-md-6 col-lg-3"><div class="benefit-card"><h5>Multiple Languages</h5><p>Learn HTML, CSS, JavaScript, Python, C and C++ in one focused ecosystem.</p></div></div>
+          <div class="col-md-6 col-lg-3"><div class="benefit-card"><h5>Real Tutor Support</h5><p>Get help with projects, assignments, revision, and technical confidence building.</p></div></div>
+          <div class="col-md-6 col-lg-3"><div class="benefit-card"><h5>Tech-First Design</h5><p>A modern coding-theme interface that feels sharp, clean, and easy to use.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space" id="bookingSection">
+      <div class="container">
+        <div class="section-title">
+          <h2>Book a tutor or reserve a class</h2>
+          <p>Submit your details, save your preferences, and come back anytime.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="booking-card">
+              <form id="bookingForm" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" id="fullName" class="form-control" autocomplete="name">
+                    <small class="error" id="nameError"></small>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-control" autocomplete="email">
+                    <small class="error" id="emailError"></small>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" autocomplete="tel">
+                    <small class="error" id="phoneError"></small>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="bookingType" class="form-label">Booking Type</label>
+                    <select id="bookingType" class="form-select">
+                      <option value="">Select an option</option>
+                      <option value="free">Free Tutor Class</option>
+                      <option value="paid">Paid Private Class</option>
+                      <option value="workshop">Workshop</option>
+                      <option value="bootcamp">Bootcamp</option>
+                    </select>
+                    <small class="error" id="typeError"></small>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="course" class="form-label">Course / Subject</label>
+                    <select id="course" class="form-select">
+                      <option value="">Select subject</option>
+                      <option value="HTML">HTML</option>
+                      <option value="CSS">CSS</option>
+                      <option value="JavaScript">JavaScript</option>
+                      <option value="Python">Python</option>
+                      <option value="C">C</option>
+                      <option value="C++">C++</option>
+                    </select>
+                    <small class="error" id="courseError"></small>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="preferredDate" class="form-label">Preferred Date</label>
+                    <input type="date" id="preferredDate" class="form-control">
+                    <small class="error" id="dateError"></small>
+                  </div>
+                  <div class="col-12">
+                    <label for="message" class="form-label">Message / Learning Goals</label>
+                    <textarea id="message" class="form-control" rows="5" placeholder="Tell us what you want to learn..."></textarea>
+                    <small class="error" id="messageError"></small>
+                  </div>
+                  <div class="col-12 d-flex flex-wrap gap-3 mt-2">
+                    <button type="submit" class="btn custom-btn-primary">Submit Booking</button>
+                    <button type="button" id="clearBookingBtn" class="btn custom-btn-secondary">Clear Saved Booking</button>
+                  </div>
+                </div>
+              </form>
+              <div id="bookingConfirmation" class="mt-4"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="saved-card mb-4">
+              <h4>Saved Booking</h4>
+              <div id="savedBooking">No booking saved yet.</div>
+            </div>
+            <div class="saved-card">
+              <h4>Quick FAQ</h4>
+              <div class="faq-item">
+                <button class="faq-question" type="button">Can I join free classes first?</button>
+                <div class="faq-answer">Yes. Free classes are available for beginners before moving into premium or structured programs.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question" type="button">Are paid classes one-to-one?</button>
+                <div class="faq-answer">Yes. Paid sessions are designed for personal guidance, assignments, project work and deeper learning.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question" type="button">Can I join workshops and bootcamps too?</button>
+                <div class="faq-answer">Yes. Codify offers both shorter workshops and longer bootcamp paths for multiple languages.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="images/codifylogo.jpeg" alt="Codify logo" class="footer-logo">
+            <span class="brand-text">Codify</span>
+          </div>
+          <p class="footer-text">Learn programming with tutors, courses, bootcamps, and workshops in a clean tech-first environment.</p>
+        </div>
+        <div class="col-md-4 col-lg-2">
+          <h5>Learning</h5>
+          <ul class="footer-links">
+            <li><a href="courses.html">HTML</a></li>
+            <li><a href="courses.html">CSS</a></li>
+            <li><a href="courses.html">JavaScript</a></li>
+            <li><a href="courses.html">Python</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <h5>Programs</h5>
+          <ul class="footer-links">
+            <li><a href="#tutorDirectory" class="learning-link" data-target="free">Free Classes</a></li>
+            <li><a href="#tutorDirectory" class="learning-link" data-target="paid">Paid Tutor Sessions</a></li>
+            <li><a href="#eventsSection" class="learning-link" data-target="workshop">Workshops</a></li>
+            <li><a href="#eventsSection" class="learning-link" data-target="bootcamp">Bootcamps</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <h5>Contact</h5>
+          <ul class="footer-links">
+            <li><a href="mailto:support@codify.com">support@codify.com</a></li>
+            <li><a href="tel:+44123456789">+44 123 456 789</a></li>
+            <li><span>Online & On Campus</span></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="footer-line">
+      <p class="copyright">© 2026 Codify. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const tutors = [
+      { name: 'Aisha Khan', subject: 'html', experience: '4 years', classType: 'free', price: 'Free', rating: '4.8', focus: 'HTML basics, forms, semantic tags' },
+      { name: 'Daniel Scott', subject: 'css', experience: '5 years', classType: 'paid', price: '£22/hour', rating: '4.9', focus: 'Flexbox, Grid, responsive design' },
+      { name: 'Maria Lopez', subject: 'javascript', experience: '6 years', classType: 'paid', price: '£25/hour', rating: '5.0', focus: 'DOM, events, validation, APIs' },
+      { name: 'John Mathew', subject: 'python', experience: '5 years', classType: 'free', price: 'Free', rating: '4.7', focus: 'Python basics, functions, logic building' },
+      { name: 'Sara Ahmed', subject: 'c', experience: '4 years', classType: 'paid', price: '£21/hour', rating: '4.6', focus: 'Pointers, memory, procedural programming' },
+      { name: 'Kevin Thomas', subject: 'cpp', experience: '6 years', classType: 'paid', price: '£26/hour', rating: '4.9', focus: 'OOP, classes, STL, problem solving' }
+    ];
+
+    const workshops = [
+      { title: 'HTML Foundations Workshop', subject: 'HTML', date: '2026-05-10', seats: 20, mode: 'Online', type: 'Workshop' },
+      { title: 'CSS Layout Masterclass', subject: 'CSS', date: '2026-05-15', seats: 15, mode: 'On Campus', type: 'Workshop' },
+      { title: 'JavaScript DOM Bootcamp', subject: 'JavaScript', date: '2026-05-20', seats: 18, mode: 'Online', type: 'Bootcamp' },
+      { title: 'Python Beginners Bootcamp', subject: 'Python', date: '2026-05-25', seats: 22, mode: 'Online', type: 'Bootcamp' },
+      { title: 'C Programming Workshop', subject: 'C', date: '2026-05-28', seats: 16, mode: 'On Campus', type: 'Workshop' },
+      { title: 'C++ OOP Bootcamp', subject: 'C++', date: '2026-06-02', seats: 14, mode: 'Online', type: 'Bootcamp' }
+    ];
+
+    const tutorContainer = document.getElementById('tutorContainer');
+    const workshopContainer = document.getElementById('workshopContainer');
+    const subjectFilter = document.getElementById('subjectFilter');
+    const classTypeFilter = document.getElementById('classTypeFilter');
+    const tutorSearch = document.getElementById('tutorSearch');
+    const bookingForm = document.getElementById('bookingForm');
+    const bookingConfirmation = document.getElementById('bookingConfirmation');
+    const savedBooking = document.getElementById('savedBooking');
+    const clearBookingBtn = document.getElementById('clearBookingBtn');
+    const tutorSectionNote = document.getElementById('tutorSectionNote');
+    const eventSectionNote = document.getElementById('eventSectionNote');
+
+    function formatSubject(subject) {
+      const map = { html: 'HTML', css: 'CSS', javascript: 'JavaScript', python: 'Python', c: 'C', cpp: 'C++' };
+      return map[subject] || subject;
+    }
+
+    function formatDate(dateString) {
+      return new Date(dateString).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function showLiveDateTime() {
+      const el = document.getElementById('liveDateTime');
+      if (el) el.innerHTML = `Current Date & Time: ${new Date().toLocaleDateString()}<br>${new Date().toLocaleTimeString()}`;
+    }
+    setInterval(showLiveDateTime, 1000);
+    showLiveDateTime();
+
+    function setCookie(name, value, days) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      document.cookie = `${name}=${encodeURIComponent(value)};expires=${d.toUTCString()};path=/`;
+    }
+
+    function getCookie(name) {
+      const cookieName = name + '=';
+      const arr = decodeURIComponent(document.cookie).split(';');
+      for (let i = 0; i < arr.length; i++) {
+        const c = arr[i].trim();
+        if (c.indexOf(cookieName) === 0) return c.substring(cookieName.length);
+      }
+      return '';
+    }
+
+    function safeBookingData() {
+      try {
+        return JSON.parse(localStorage.getItem('bookingData'));
+      } catch {
+        return null;
+      }
+    }
+
+    function renderTutors(list) {
+      tutorContainer.innerHTML = '';
+
+      if (!list.length) {
+        tutorContainer.innerHTML = '<div class="col-12"><div class="filter-box text-center">No tutors found. Try another filter.</div></div>';
+        return;
+      }
+
+      list.forEach((tutor) => {
+        const card = document.createElement('div');
+        card.className = 'col-md-6 col-lg-4';
+        card.innerHTML = `
+          <div class="tutor-card h-100">
+            <div class="tutor-badge-row">
+              <span class="subject-badge">${formatSubject(tutor.subject)}</span>
+              <span class="class-badge ${tutor.classType}">${tutor.classType.toUpperCase()}</span>
+            </div>
+            <h4>${tutor.name}</h4>
+            <p><strong>Experience:</strong> ${tutor.experience}</p>
+            <p><strong>Rating:</strong> ${tutor.rating}</p>
+            <p><strong>Focus:</strong> ${tutor.focus}</p>
+            <p><strong>Price:</strong> ${tutor.price}</p>
+            <button class="btn custom-btn-primary card-action-btn selectTutorBtn" data-name="${tutor.name}" data-subject="${formatSubject(tutor.subject)}" data-type="${tutor.classType}">${tutor.classType === 'free' ? 'Join Free Class' : 'Book Paid Class'}</button>
+          </div>
+        `;
+        tutorContainer.appendChild(card);
+      });
+
+      $('.tutor-card').hide().fadeIn(450);
+    }
+
+    function renderWorkshops() {
+      workshopContainer.innerHTML = '';
+      workshops.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'col-md-6 col-lg-4';
+        card.innerHTML = `
+          <div class="workshop-card h-100">
+            <div class="workshop-badge-row">
+              <span class="subject-badge">${item.subject}</span>
+              <span class="mode-badge">${item.mode}</span>
+            </div>
+            <h4>${item.title}</h4>
+            <p><strong>Type:</strong> ${item.type}</p>
+            <p><strong>Date:</strong> ${formatDate(item.date)}</p>
+            <p><strong>Seats Left:</strong> ${item.seats}</p>
+            <button class="btn custom-btn-secondary card-action-btn joinWorkshopBtn" data-title="${item.title}" data-subject="${item.subject}" data-type="${item.type}">Join ${item.type}</button>
+          </div>
+        `;
+        workshopContainer.appendChild(card);
+      });
+      $('.workshop-card').hide().fadeIn(500);
+    }
+
+    function renderFilteredEvents(type) {
+      const eventType = type.toLowerCase();
+      const filtered = workshops.filter((item) => item.type.toLowerCase() === eventType);
+      workshopContainer.innerHTML = '';
+
+      filtered.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'col-md-6 col-lg-4';
+        card.innerHTML = `
+          <div class="workshop-card h-100">
+            <div class="workshop-badge-row">
+              <span class="subject-badge">${item.subject}</span>
+              <span class="mode-badge">${item.mode}</span>
+            </div>
+            <h4>${item.title}</h4>
+            <p><strong>Type:</strong> ${item.type}</p>
+            <p><strong>Date:</strong> ${formatDate(item.date)}</p>
+            <p><strong>Seats Left:</strong> ${item.seats}</p>
+            <button class="btn custom-btn-secondary card-action-btn joinWorkshopBtn" data-title="${item.title}" data-subject="${item.subject}" data-type="${item.type}">Join ${item.type}</button>
+          </div>
+        `;
+        workshopContainer.appendChild(card);
+      });
+
+      $('.workshop-card').hide().fadeIn(500);
+    }
+
+    function handleLearningLink(target) {
+      if (target === 'free' || target === 'paid') {
+        classTypeFilter.value = target;
+        tutorSearch.value = '';
+        filterTutors();
+        if (tutorSectionNote) {
+          tutorSectionNote.textContent = target === 'free'
+            ? 'Showing free tutor classes for beginners. Pick a tutor below or continue to the booking section.'
+            : 'Showing private paid classes for focused 1-to-1 support. Pick a tutor below or continue to the booking section.';
+        }
+      }
+
+      if (target === 'workshop' || target === 'bootcamp') {
+        renderFilteredEvents(target);
+        if (eventSectionNote) {
+          eventSectionNote.textContent = target === 'workshop'
+            ? 'Showing live workshops only. Choose one below to prefill the booking form.'
+            : 'Showing bootcamps only. Choose one below to prefill the booking form.';
+        }
+      }
+    }
+
+    function filterTutors() {
+      const subject = subjectFilter.value.toLowerCase();
+      const classType = classTypeFilter.value.toLowerCase();
+      const search = tutorSearch.value.toLowerCase();
+
+      const filtered = tutors.filter((tutor) => {
+        const subjectMatch = subject === 'all' || tutor.subject === subject;
+        const typeMatch = classType === 'all' || tutor.classType === classType;
+        const searchMatch = tutor.name.toLowerCase().includes(search) || tutor.subject.toLowerCase().includes(search) || formatSubject(tutor.subject).toLowerCase().includes(search);
+        return subjectMatch && typeMatch && searchMatch;
+      });
+
+      renderTutors(filtered);
+    }
+
+    function setMinDate() {
+      document.getElementById('preferredDate').setAttribute('min', new Date().toISOString().split('T')[0]);
+    }
+
+    function resetValidationStyles() {
+      document.querySelectorAll('.form-control, .form-select').forEach((field) => field.classList.remove('is-invalid-custom', 'is-valid-custom'));
+      document.querySelectorAll('.error').forEach((e) => e.textContent = '');
+    }
+
+    function validateForm() {
+      resetValidationStyles();
+      let isValid = true;
+
+      const fullName = document.getElementById('fullName');
+      const email = document.getElementById('email');
+      const phone = document.getElementById('phone');
+      const bookingType = document.getElementById('bookingType');
+      const course = document.getElementById('course');
+      const preferredDate = document.getElementById('preferredDate');
+      const message = document.getElementById('message');
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phonePattern = /^[+\d\s\-()]{10,20}$/;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const selectedDate = preferredDate.value ? new Date(preferredDate.value) : null;
+
+      if (fullName.value.trim().length < 3) {
+        document.getElementById('nameError').textContent = 'Please enter your full name.';
+        fullName.classList.add('is-invalid-custom');
+        isValid = false;
+      } else {
+        fullName.classList.add('is-valid-custom');
+      }
+
+      if (!emailPattern.test(email.value.trim())) {
+        document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+        email.classList.add('is-invalid-custom');
+        isValid = false;
+      } else {
+        email.classList.add('is-valid-custom');
+      }
+
+      if (!phonePattern.test(phone.value.trim())) {
+        document.getElementById('phoneError').textContent = 'Please enter a valid phone number.';
+        phone.classList.add('is-invalid-custom');
+        isValid = false;
+      } else {
+        phone.classList.add('is-valid-custom');
+      }
+
+      if (bookingType.value === '') {
+        document.getElementById('typeError').textContent = 'Please select a booking type.';
+        bookingType.classList.add('is-invalid-custom');
+        isValid = false;
+      } else {
+        bookingType.classList.add('is-valid-custom');
+      }
+
+      if (course.value === '') {
+        document.getElementById('courseError').textContent = 'Please select a course.';
+        course.classList.add('is-invalid-custom');
+        isValid = false;
+      } else {
+        course.classList.add('is-valid-custom');
+      }
+
+      if (preferredDate.value === '') {
+        document.getElementById('dateError').textContent = 'Please choose a date.';
+        preferredDate.classList.add('is-invalid-custom');
+        isValid = false;
+      } else if (selectedDate < today) {
+        document.getElementById('dateError').textContent = 'Please choose today or a future date.';
+        preferredDate.classList.add('is-invalid-custom');
+        isValid = false;
+      } else {
+        preferredDate.classList.add('is-valid-custom');
+      }
+
+      if (message.value.trim().length < 15) {
+        document.getElementById('messageError').textContent = 'Message should be at least 15 characters.';
+        message.classList.add('is-invalid-custom');
+        isValid = false;
+      } else {
+        message.classList.add('is-valid-custom');
+      }
+
+      return isValid;
+    }
+
+    function displaySavedBooking() {
+      const saved = safeBookingData();
+      const lastTutor = localStorage.getItem('lastTutor') || getCookie('lastTutor');
+      const preferredSubject = getCookie('preferredSubject');
+
+      if (!saved && !lastTutor && !preferredSubject) {
+        savedBooking.innerHTML = 'No booking saved yet.';
+        return;
+      }
+
+      savedBooking.innerHTML = `
+        ${saved ? `
+          <p><strong>Name:</strong> ${saved.fullName}</p>
+          <p><strong>Email:</strong> ${saved.email}</p>
+          <p><strong>Phone:</strong> ${saved.phone}</p>
+          <p><strong>Type:</strong> ${saved.bookingType}</p>
+          <p><strong>Course:</strong> ${saved.course}</p>
+          <p><strong>Date:</strong> ${saved.preferredDate}</p>
+        ` : ''}
+        ${lastTutor ? `<p><strong>Last Tutor:</strong> ${lastTutor}</p>` : ''}
+        ${preferredSubject ? `<p><strong>Preferred Subject:</strong> ${preferredSubject}</p>` : ''}
+      `;
+    }
+
+    tutorContainer.addEventListener('click', function (e) {
+      const btn = e.target.closest('.selectTutorBtn');
+      if (!btn) return;
+      const tutorName = btn.dataset.name;
+      const subject = btn.dataset.subject;
+      const classType = btn.dataset.type;
+      document.getElementById('course').value = subject;
+      document.getElementById('bookingType').value = classType;
+      document.getElementById('message').value = `I would like to join ${classType} class with ${tutorName} for ${subject}.`;
+      localStorage.setItem('lastTutor', tutorName);
+      setCookie('lastTutor', tutorName, 7);
+      setCookie('preferredSubject', subject, 7);
+      document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
+      displaySavedBooking();
+    });
+
+    workshopContainer.addEventListener('click', function (e) {
+      const btn = e.target.closest('.joinWorkshopBtn');
+      if (!btn) return;
+      const title = btn.dataset.title;
+      const subject = btn.dataset.subject;
+      const type = btn.dataset.type.toLowerCase();
+      document.getElementById('course').value = subject;
+      document.getElementById('bookingType').value = type;
+      document.getElementById('message').value = `I want to join the ${title}.`;
+      document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    bookingForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!validateForm()) return;
+
+      const bookingData = {
+        fullName: document.getElementById('fullName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        bookingType: document.getElementById('bookingType').value,
+        course: document.getElementById('course').value,
+        preferredDate: document.getElementById('preferredDate').value,
+        message: document.getElementById('message').value.trim()
+      };
+
+      localStorage.setItem('bookingData', JSON.stringify(bookingData));
+      setCookie('preferredSubject', bookingData.course, 7);
+
+      bookingConfirmation.innerHTML = `
+        <div class="success-box">
+          <h5>Booking submitted successfully</h5>
+          <p><strong>Name:</strong> ${bookingData.fullName}</p>
+          <p><strong>Type:</strong> ${bookingData.bookingType}</p>
+          <p><strong>Course:</strong> ${bookingData.course}</p>
+          <p><strong>Date:</strong> ${bookingData.preferredDate}</p>
+        </div>
+      `;
+
+      $('#bookingConfirmation').hide().fadeIn(450);
+      displaySavedBooking();
+      bookingForm.reset();
+      document.querySelectorAll('.form-control, .form-select').forEach((field) => field.classList.remove('is-valid-custom'));
+    });
+
+    clearBookingBtn.addEventListener('click', function () {
+      localStorage.removeItem('bookingData');
+      localStorage.removeItem('lastTutor');
+      setCookie('lastTutor', '', -1);
+      setCookie('preferredSubject', '', -1);
+      savedBooking.innerHTML = 'No booking saved yet.';
+      bookingConfirmation.innerHTML = '';
+      bookingForm.reset();
+      resetValidationStyles();
+    });
+
+    subjectFilter.addEventListener('change', filterTutors);
+    classTypeFilter.addEventListener('change', filterTutors);
+    tutorSearch.addEventListener('input', filterTutors);
+
+    document.querySelectorAll('.learning-link').forEach((link) => {
+      link.addEventListener('click', function () {
+        handleLearningLink(this.dataset.target);
+      });
+    });
+
+    $(document).ready(function () {
+      $('.faq-answer').hide();
+      $('.faq-question').on('click', function () {
+        const answer = $(this).next('.faq-answer');
+        $('.faq-answer').not(answer).slideUp(200);
+        answer.stop(true, true).slideToggle(220);
+      });
+
+      const preferredSubject = getCookie('preferredSubject');
+      if (preferredSubject) {
+        subjectFilter.value = preferredSubject === 'C++' ? 'cpp' : preferredSubject.toLowerCase();
+      }
+
+      renderTutors(tutors);
+      renderWorkshops();
+      filterTutors();
+      displaySavedBooking();
+      setMinDate();
+    });
+  </script>
+</body>
+</html>
