@@ -71,13 +71,15 @@ body {
     min-height: 44px;
     padding: 0 16px;
     border-radius: 999px;
-    color: rgba(255, 255, 255, 0.86);
+    color: rgba(255, 255, 225, 0.86);
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 .topbar {
     text-decoration: none;
 
 }
+.topbar {
+    text-decoration: none;
 
 
 /* Buddy close */
